@@ -1,37 +1,50 @@
-.place-order{
-    display:flex;
-    align-items: start;
-    justify-content: space-between;
-    gap: 50px;
-    margin-top: 100px ;
+.place-order {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center; /* Center the flex items horizontally */
+    gap: 20px; /* Adjust the gap as needed */
+    margin-top: 100px;
 }
-.place-order-left{
-    width: 100%;
-    max-width:max(30%,500px) ;
+
+.place-order-left,
+.place-order-right {
+    width: 45%; /* Ensure both sections are of equal width */
+    max-width: 45%; /* Ensure both sections are of equal width */
 }
-.place-order-left .title{
+
+.box {
+    padding: 20px; /* Add padding inside the boxes */
+    border: 1px solid #c5c5c5; /* Add a border to the boxes */
+    border-radius: 8px; /* Add rounded corners to the boxes */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.place-order-left .title {
     font-size: 30px;
     font-weight: 600;
-    margin-bottom:50px ;
+    margin-bottom: 50px;
 }
-.place-order-left input{
+
+.place-order-left input {
     margin-bottom: 15px;
     width: 100%;
-    padding:10px;
-    border:1px solid #c5c5c5;
-    border-radius:4px;
-    outline-color: tomato;
+    padding: 10px;
+    border: 1px solid #c5c5c5;
+    border-radius: 4px;
+    outline-color:;
+    background-color: rgba(255, 255, 255, 0.6);
+}
 
+.place-order-left .multi-fields {
+    display: flex;
+    gap: 10px;
 }
-.place-order-left .multi-fields{
-    display:flex; 
-    gap:10px;
 
+.place-order-right .cart-total {
+    margin-top: 0; /* Remove top margin to align better */
 }
-.place-order-right{
-    width: 100%;
-    max-width:max(40%,500px);
-}
-.place-order-right .cart-total button{
+
+.place-order-right .cart-total button {
     margin-top: 30px;
 }

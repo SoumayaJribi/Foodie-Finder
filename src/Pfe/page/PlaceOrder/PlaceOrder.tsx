@@ -1,16 +1,27 @@
 import { useContext } from "react";
 import { StoreContext } from "../Menu/context/StoreContext";
 import "./PlaceOrder.css";
+import cartback from "../../../assets/cartback.jpg";
 
-const Placeorder = () => {
+const PlaceOrder = () => {
   const { getTotalCartAmount }: any = useContext(StoreContext);
   return (
-    <form className="place-order">
-      <div className="place-order-left">
+    <form
+      className="place-order"
+      style={{
+        backgroundImage: `url(${cartback})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div className="place-order-left box">
         <p className="title">Informations de livraison</p>
         <div className="multi-fields">
-          <input type="text" placeholder="NOM " />
-          <input type="text" placeholder="PRENOM " />
+          <input type="text" placeholder="NOM D'UTILISATEUR" />
         </div>
         <div className="multi-fields">
           <input type="text" placeholder="ADRESSE" />
@@ -23,17 +34,17 @@ const Placeorder = () => {
           <input type="text" placeholder="PHONE" />
         </div>
       </div>
-      <div className="place-order-right">
+      <div className="place-order-right box">
         <div className="cart-total">
-          <h2>Cart Totals</h2>
+          <h2>Totaux du panier</h2>
           <div>
             <div className="cart-item-details">
-              <p>Subtotal</p>
+              <p>Total</p>
               <p>{getTotalCartAmount("cart")} TND</p>
             </div>
             <hr />
             <div className="cart-item-details">
-              <p>Delivery Fee</p>
+              <p>Frais de Livraison</p>
               <p>4 TND</p>
             </div>
             <hr />
@@ -42,10 +53,10 @@ const Placeorder = () => {
               <b> TND</b>
             </div>
           </div>
-          <button className="cart-total-button">PROCEED TO Payment</button>
+          <button className="cart-total-button">PAIMENT</button>
         </div>
       </div>
     </form>
   );
 };
-export default Placeorder;
+export default PlaceOrder;
