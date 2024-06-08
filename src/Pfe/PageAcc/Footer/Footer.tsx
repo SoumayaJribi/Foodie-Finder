@@ -23,9 +23,9 @@ const Footer = () => {
       <div className="bottom">
         <div>
           <h3>Moyens de Contact</h3>
-          <p>Email: contact@example.com</p>
-          <p>Téléphone: +123456789</p>
-          <p>Adresse: 123 rue de l'exemple, Ville, Pays</p>
+          <p>Email: contact@foodiefinder.com</p>
+          <p>Téléphone: +216 55222999</p>
+          <p>Adresse: Avenue Habib Bourguiba, Mahdia, Tunisie</p>
           <p>Service Client: Du lundi au vendredi, de 9h à 17h</p>
         </div>
       </div>

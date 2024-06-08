@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { StoreContext } from "../Menu/context/StoreContext";
 import "./PlaceOrder.css";
 import cartback from "../../../assets/cartback.jpg";
+import { Button } from "@mui/material";
 
 const PlaceOrder = () => {
   const { getTotalCartAmount }: any = useContext(StoreContext);
+
   return (
     <form
       className="place-order"
@@ -21,7 +23,7 @@ const PlaceOrder = () => {
       <div className="place-order-left box">
         <p className="title">Informations de livraison</p>
         <div className="multi-fields">
-          <input type="text" placeholder="NOM D'UTILISATEUR" />
+          <input type="text" placeholder="NOM DUTILISATEUR" />
         </div>
         <div className="multi-fields">
           <input type="text" placeholder="ADRESSE" />
@@ -33,8 +35,41 @@ const PlaceOrder = () => {
         <div className="multi-fields">
           <input type="text" placeholder="PHONE" />
         </div>
+        <div
+          className="button-group"
+          style={{ display: "flex", justifyContent: "center", gap: "10px" }}
+        >
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              backgroundColor: "#000000",
+              color: "#ffffff",
+              "&:hover": {
+                backgroundColor: "#e0b828",
+                color: "#000000",
+              },
+            }}
+          >
+            Soumettre
+          </Button>
+          <Button
+            type="reset"
+            variant="contained"
+            sx={{
+              backgroundColor: "#000000",
+              color: "#ffffff",
+              "&:hover": {
+                backgroundColor: "#e0b828",
+                color: "#000000",
+              },
+            }}
+          >
+            Réinitialiser
+          </Button>
+        </div>
       </div>
-      <div className="place-order-right box">
+      {/*<div className="place-order-right box">
         <div className="cart-total">
           <h2>Totaux du panier</h2>
           <div>
@@ -55,8 +90,9 @@ const PlaceOrder = () => {
           </div>
           <button className="cart-total-button">PAIMENT</button>
         </div>
-      </div>
+      </div>*/}
     </form>
   );
 };
+
 export default PlaceOrder;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -47,7 +47,6 @@ export default function EditDemande({ closeEvent }) {
           >
             <MenuItem value="Accepté">Accepté</MenuItem>
             <MenuItem value="Rejeté">Rejeté</MenuItem>
-            <MenuItem value="Bloqué">Bloqué</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12}>
