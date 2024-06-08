@@ -20,7 +20,7 @@ const Placeorder = () => {
           <input type="text" placeholder="VILLE" />
         </div>
         <div className="multi-fields">
-          <input type="text" placeholder="phone" />
+          <input type="text" placeholder="PHONE" />
         </div>
       </div>
       <div className="place-order-right">
