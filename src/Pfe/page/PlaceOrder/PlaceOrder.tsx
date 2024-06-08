@@ -9,10 +9,12 @@ const Placeorder = () => {
       <div className="place-order-left">
         <p className="title">Informations de livraison</p>
         <div className="multi-fields">
-          <input type="text" placeholder="PRENOM" />
-          <input type="text" placeholder="NOM" />
+          <input type="text" placeholder="NOM " />
+          <input type="text" placeholder="PRENOM " />
         </div>
-        <input type="text" placeholder="ADRESSE" />
+        <div className="multi-fields">
+          <input type="text" placeholder="ADRESSE" />
+        </div>
         <div className="multi-fields">
           <input type="text" placeholder="PROVINCE" />
           <input type="text" placeholder="VILLE" />
