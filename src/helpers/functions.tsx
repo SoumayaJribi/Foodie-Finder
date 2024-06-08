@@ -75,7 +75,7 @@ export const getTotalPrice = (keyWord: string) => {
   const items = localeDATA ? JSON.parse(localeDATA) : [];
 
   // Calculate the total price
-  const totalPrice = items.reduce((total, item) => {
+  const totalPrice = items.reduce((total: any, item: any) => {
     return total + item.price * item.count;
   }, 0);
 

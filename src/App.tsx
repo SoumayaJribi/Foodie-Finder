@@ -23,6 +23,7 @@ import { Menu } from "./pages/Menu/Menu";
 import FormConfirmation from "./pages/FormRestau/FormConfirmation";
 import Demandes from "./pages/Demandes";
 import Orders from "./pages/Orders";
+import PlaceOrder from "./Pfe/page/PlaceOrder/PlaceOrder";
 import { UserProvider } from "./Pfe/PageAcc/Oppor/UserContext";
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="mmenu" element={<MHome />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<PlaceOrder />} />
           <Route path="inscri" element={<RestaurantForm />} />
           <Route path="confirmation" element={<FormConfirmation />} />
           <Route path="*" element={<NotFound />} />

@@ -12,6 +12,7 @@ import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 import { Box, IconButton } from "@mui/material";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const context = useContext(StoreContext);
   const [foodList, setFoodList] = useState(getStorage("cart"));
@@ -20,6 +21,7 @@ const Cart = () => {
   }
 
   const { cartItems } = context;
+  const Navigate = useNavigate();
 
   return (
     <div
@@ -122,10 +124,15 @@ const Cart = () => {
                 <hr />
                 <div className="cart-item-details">
                   <b>Total</b>
-                  <b> TND</b>
+                  <b> TND </b>
                 </div>
               </div>
-              <button className="cart-total-button">PROCEED TO CHECKOUT</button>
+              <button
+                className="cart-total-button"
+                onClick={() => Navigate("/checkout")}
+              >
+                PROCEED TO CHECKOUT
+              </button>
             </div>
 
             <div className="cart-promocode">
