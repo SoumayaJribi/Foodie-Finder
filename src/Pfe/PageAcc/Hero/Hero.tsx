@@ -19,11 +19,15 @@ function Hero({ setSearchData }: props) {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.get(`${BASE_URL}/search?search=${search}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BASE_URL}/clients/search?search=${search}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
       await setSearchData(response?.data);
     } catch (error) {
       console.log({ error });

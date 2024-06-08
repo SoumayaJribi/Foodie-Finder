@@ -9,7 +9,7 @@ import DataSearch from "./DataSearch/DataSearch";
 function Home() {
   const { user } = useAuth();
   const [searchData, setSearchData] = useState([]);
-
+  console.log(searchData);
   console.log(user);
   return (
     <>

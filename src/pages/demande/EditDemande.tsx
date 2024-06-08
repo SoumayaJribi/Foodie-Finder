@@ -8,10 +8,10 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem"; // Importez MenuItem
 
-export default function EditDemande({ closeEvent }) {
+export default function EditDemande({ closeEvent }: any) {
   const [statut, setStatut] = useState("");
 
-  const handleStatutChange = (event) => {
+  const handleStatutChange = (event: any) => {
     setStatut(event.target.value);
   };
 
