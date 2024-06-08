@@ -8,13 +8,19 @@ import DataSearch from "./DataSearch/DataSearch";
 
 function Home() {
   const { user } = useAuth();
-  const [searchData, setSearchData] = useState([]);
+  const [searchData, setSearchData] = useState({
+    restaurants: [],
+    menus: [],
+    menuItems: [],
+  });
 
   console.log(user);
   return (
     <>
       <Hero setSearchData={setSearchData} />
-      {searchData.length > 0 && <DataSearch data={searchData} />}
+      {searchData.restaurants.length > 0 && (
+        <DataSearch data={searchData.restaurants} />
+      )}
       <Order />
       <Oppor />
       <Footer />
