@@ -1,0 +1,89 @@
+.order {
+    margin: 4rem 6rem;
+   }
+   
+   .order h1 {
+    font-size: 3rem;
+    text-align: center;
+   }
+   .first-des{
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       margin-top: 4.5rem;
+   
+   }
+   .des-text{
+       width: 45%;
+       text-align: center;
+       font-size: 1.1rem;
+   }
+   .des-text .p{
+       text-align: start;
+   }
+    .menu-button{
+       margin-top: 1rem; /* Ajoute un espace au-dessus du bouton */
+       background-color: #0b0b0b; /* Couleur de fond */
+       color: #fff; /* Couleur du texte */
+       border: none; /* Supprime les bordures */
+       border-radius: 4px; /* Ajoute des bordures arrondies */
+       padding: 0.6rem 2.5rem; /* Ajoute de l'espace à l'intérieur du bouton */
+       font-size: 1rem; /* Taille de la police */
+       font-weight: 600; /* Poids de la police */
+       cursor: pointer;
+       transition: background-color 0.3s ease;
+   }
+   
+   .menu-button:hover {
+       background-color:  rgb(249, 247, 97); /* Couleur de fond au survol */
+   }
+   .image{
+       position: relative;
+       width: 50%;
+       display: flex;
+       justify-content: space-between;
+       z-index: -99;
+   }
+   
+   .image img{
+       width: 49%;
+       height: 350px;
+       object-fit: cover;
+       border-radius: 6px;
+       box-shadow: -1px 1px 62px -1px rgba(0, 0, 0, 0.19);
+   }
+   .image img:nth-child(2){
+       position: absolute;
+       top: -20px;
+       right: 0;
+   }
+   
+   @media screen and (max-width: 768px) {.order {
+    margin: 3rem 2rem; /* Ajuste les marges pour les appareils plus petits */
+}
+
+.first-des {
+    display: flex;
+    flex-direction: column-reverse;
+
+    margin-top: 2.5rem;
+}
+
+.des-text {
+    width: 100%; /* Ajuste la largeur du texte pour occuper toute la largeur */
+}
+
+.menu-button {
+    margin-top: 1rem; /* Ajoute de l'espace au-dessus du bouton */
+    padding: 0.5rem 1.5rem; /* Ajuste la taille du bouton */
+    font-size: 0.9rem; /* Ajuste la taille du texte du bouton */
+
+}
+
+.image {
+    width: 100%; /* Utilise la largeur totale pour les images */
+    margin: 1.8rem 0; /* Ajoute un peu plus d'espace au-dessus des images */
+}
+
+.image img {
+    height: 250px; /* Utilise la largeur totale pour les images */}}
