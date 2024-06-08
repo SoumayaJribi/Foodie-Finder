@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -6,11 +6,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem"; // Importez MenuItem
+import MenuItem from "@mui/material/MenuItem";
 import Axios from "axios";
 import { BASE_URL } from "../../../config";
 
-export default function EditRestaurants({ closeEvent }) {
+export default function EditRestaurants({ closeEvent }: any) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -20,28 +20,28 @@ export default function EditRestaurants({ closeEvent }) {
   const [status, setStatus] = useState(""); // État pour le statut sélectionné
   const [image, setImage] = useState(null);
 
-  const handleNameChange = (event) => {
+  const handleNameChange = (event: any) => {
     setName(event.target.value);
   };
-  const handlePhoneChange = (event) => {
+  const handlePhoneChange = (event: any) => {
     setPhone(event.target.value);
   };
-  const handleAddressChange = (event) => {
+  const handleAddressChange = (event: any) => {
     setAddress(event.target.value);
   };
-  const handleEmailChange = (event) => {
+  const handleEmailChange = (event: any) => {
     setEmail(event.target.value);
   };
-  const handleOpeningHoursChange = (event) => {
+  const handleOpeningHoursChange = (event: any) => {
     setOpeningHours(event.target.value);
   };
-  const handleCuisineTypeChange = (event) => {
+  const handleCuisineTypeChange = (event: any) => {
     setCuisineType(event.target.value);
   };
-  const handleStatusChange = (event) => {
+  const handleStatusChange = (event: any) => {
     setStatus(event.target.value);
   };
-  const handleImageChange = (event) => {
+  const handleImageChange = (event: any) => {
     setImage(event.target.files[0]);
   };
 
