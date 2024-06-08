@@ -2,8 +2,38 @@ import "./HeroStyle.css";
 import Image from "../../../assets/i1.jpg";
 import { AiOutlineSearch } from "react-icons/ai";
 import Navbar from "../Navbar/Navbar";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "../../../../config";
 
-function Hero() {
+type props = { setSearchData: any };
+
+function Hero({ setSearchData }: props) {
+  const [search, setSearch] = useState<string>("");
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  const handleSearch = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.get(`${BASE_URL}/search?search=${search}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      await setSearchData(response?.data);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  useEffect(() => {
+    handleSearch();
+  }, [search]);
+
   return (
     <>
       <Navbar />
@@ -18,6 +48,8 @@ function Hero() {
                 type="search"
                 placeholder="TypeHere"
                 className="search-input"
+                onChange={handleChange}
+                value={search}
               />
               <button>
                 <AiOutlineSearch />
