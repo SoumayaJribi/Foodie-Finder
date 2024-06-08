@@ -132,6 +132,7 @@ export default function restaurantsList() {
   const deleteRestaurant = (id: number) => {
     setRows((prevRows) => prevRows.filter((row) => row.id !== id));
   };
+
   const fetchRestaurantMenu = async () => {
     const token = localStorage.getItem("token");
 
@@ -147,9 +148,11 @@ export default function restaurantsList() {
       console.error("Error fetching user profile:", error);
     }
   };
+
   useEffect(() => {
     fetchRestaurantMenu();
   }, []);
+  
   console.log(data);
   return (
     <>
