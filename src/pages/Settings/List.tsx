@@ -119,11 +119,15 @@ export default function List({ idMenu }: { idMenu: string }) {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.get(`${BASE_URL}/...../${idMenu}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BASE_URL}/restaurants/${idMenu}/categories
+`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setCategories(response.data);
     } catch (error) {
