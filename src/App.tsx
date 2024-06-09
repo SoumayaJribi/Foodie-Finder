@@ -34,6 +34,7 @@ function App() {
   useEffect(() => {
     if (!token) navigate("auth/login");
   }, []);
+
   return (
     <UserProvider>
       <Routes>

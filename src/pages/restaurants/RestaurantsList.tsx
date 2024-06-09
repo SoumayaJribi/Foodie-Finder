@@ -162,7 +162,6 @@ export default function restaurantsList() {
     fetchRestaurantMenu();
   }, []);
 
-  console.log(data);
   return (
     <>
       <div>
@@ -203,6 +202,7 @@ export default function restaurantsList() {
           </Box>
         </Modal>
       </div>
+
       {rows.length > 0 && (
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <Box

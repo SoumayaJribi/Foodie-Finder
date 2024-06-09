@@ -86,20 +86,22 @@ const ExploreMenu: React.FC<ExploreMenuProps> = ({ category, setCategory }) => {
       <h1>Explore our restaurants</h1>
       <div className="explore-menu-list">
         {/* Affichage des restaurants */}
-        {restaurantsData.map((restaurant, index) => (
+        {restaurant_list.map((restaurant, index) => (
           <div
-            onClick={() => handleRestaurantClick(restaurant?.name)}
+            onClick={() => handleRestaurantClick(restaurant?.restaurant_name)}
             key={index}
             className="explore-menu-list-item"
           >
             <img
               className={
-                selectedRestaurant === restaurant?.name ? "active" : ""
+                selectedRestaurant === restaurant?.restaurant_name
+                  ? "active"
+                  : ""
               }
-              src={restaurant?.imageUrl}
-              alt={restaurant?.name}
+              src={restaurant?.restaurant_image}
+              alt={restaurant?.restaurant_name}
             />
-            <p>{restaurant?.name}</p>
+            <p>{restaurant?.restaurant_name}</p>
           </div>
         ))}
       </div>
@@ -109,22 +111,22 @@ const ExploreMenu: React.FC<ExploreMenuProps> = ({ category, setCategory }) => {
         <div className="menu-and-food-list">
           {/* Liste des menus */}
           <div className="explore-menu-list">
-            {menusData.map((item, index) => (
+            {menu_list.map((item, index) => (
               <div
                 onClick={() =>
                   setCategory((prev) =>
-                    prev === item.name ? "All" : item.name
+                    prev === item.menu_name ? "All" : item.menu_name
                   )
                 }
                 key={index}
                 className="explore-menu-list-item"
               >
                 <img
-                  className={category === item.name ? "active" : ""}
-                  src={item.imageUrl}
-                  alt={item.name}
+                  className={category === item.menu_name ? "active" : ""}
+                  src={item.menu_image}
+                  alt={item.menu_name}
                 />
-                <p>{item.name}</p>
+                <p>{item.menu_name}</p>
               </div>
             ))}
           </div>

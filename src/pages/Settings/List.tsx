@@ -112,8 +112,6 @@ export default function List({ idMenu }: { idMenu: string }) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
   const [tabToDelete, setTabToDelete] = React.useState<number | null>(null);
 
-  console.log({ tabs });
-
   const getGategoriesList = async () => {
     const token = localStorage.getItem("token");
 

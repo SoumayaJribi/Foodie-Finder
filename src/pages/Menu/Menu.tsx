@@ -5,7 +5,6 @@ import List from "../Settings/List";
 
 export const Menu = () => {
   const { idMenu } = useParams();
-  console.log({ idMenu });
   return (
     <div
       style={{

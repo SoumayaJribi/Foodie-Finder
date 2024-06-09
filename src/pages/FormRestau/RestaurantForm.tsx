@@ -2,18 +2,43 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "./RestaurantForm.css";
 import form from "../../assets/form.jpg";
+import axios from "axios";
+import { BASE_URL } from "../../../config";
 
 const RestaurantForm = () => {
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // Envoyer les données au serveur
+  const onSubmit = async (data) => {
+    try {
+      await axios.post(
+        `${BASE_URL}/restaurants/register
+`,
+        {
+          name: data.name,
+          address: data.address,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+          openeingHours: data.openingHours,
+          cuisineType: data.cuisineType,
+          imageUrl: data.imageUrl,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log({ error });
+    }
+
     navigate("/confirmation", { state: { formData: data } });
   };
 
