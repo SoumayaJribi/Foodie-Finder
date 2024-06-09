@@ -1,5 +1,9 @@
-import { useEffect, useEffect, useState } from "react";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import { Box, Button, Divider, Modal, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,16 +11,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import Stack from "@mui/material/Stack";
-import EditIcon from "@mui/icons-material/Edit";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Typography, Divider, Button, Box, Modal } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { BASE_URL } from "../../../config";
+import AddCat from "./AddCat";
 import DeleteCat from "./DeleteCat";
 import EditCat from "./EditCat";
-import AddCat from "./AddCat";
-import axios from "axios";
-import { BASE_URL } from "../../../config";
 
 const style = {
   position: "absolute" as "absolute",
@@ -29,33 +29,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-const mockData = [
-  {
-    image: null,
-    id: 1,
-    name: "",
-    price: "",
-    description: "",
-    date: "",
-  },
-  {
-    image: null,
-    id: 2,
-    name: "",
-    price: "",
-    description: "",
-    date: "",
-  },
-  {
-    image: null,
-    id: 3,
-    name: "",
-    price: "",
-    description: "",
-    date: "",
-  },
-];
 
 const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
   const token = localStorage.getItem("token");
@@ -109,23 +82,6 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
     }
   };
 
-  const handleGetMenuItems = async () => {
-    try {
-      const response = await axios.get(
-        `${BASE_URL}/restaurants/${categoryId}/menu-Items
-`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setRows(response.data);
-    } catch (error) {
-      console.log("error while getting menuItems", error);
-    }
-  };
   const handleGetMenuItems = async () => {
     const token = localStorage.getItem("token");
 

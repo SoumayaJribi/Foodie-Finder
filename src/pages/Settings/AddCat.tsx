@@ -9,12 +9,12 @@ import axios from "axios";
 import { useState } from "react";
 import { BASE_URL } from "../../../config";
 
-export default function AddCat({ closeEvent, categoryId, categoryId }) {
+export default function AddCat({ closeEvent, categoryId }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState();
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  
+
   const handleNameChange = (event: any) => {
     setName(event.target.value);
   };
