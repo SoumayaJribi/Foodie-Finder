@@ -1,11 +1,11 @@
-import { useContext } from "react";
-import { StoreContext } from "../Menu/context/StoreContext";
+//import { useContext } from "react";
+//import { StoreContext } from "../Menu/context/StoreContext";
 import "./PlaceOrder.css";
 import cartback from "../../../assets/cartback.jpg";
 import { Button } from "@mui/material";
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount }: any = useContext(StoreContext);
+  //const { getTotalCartAmount }: any = useContext(StoreContext);
 
   return (
     <form

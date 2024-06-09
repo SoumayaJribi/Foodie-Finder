@@ -101,7 +101,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function List({ menuId }: { menuId: string }) {
+export default function List({ idMenu }: { idMenu: string }) {
   const [value, setValue] = React.useState(0);
   const [tabs, setTabs] = React.useState([]); // Initial state is an empty array
   const [newTabLabel, setNewTabLabel] = React.useState<string>("");
@@ -119,7 +119,7 @@ export default function List({ menuId }: { menuId: string }) {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.get(`${BASE_URL}/...../${menuId}`, {
+      const response = await axios.get(`${BASE_URL}/...../${idMenu}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -133,7 +133,7 @@ export default function List({ menuId }: { menuId: string }) {
 
   useEffect(() => {
     getGategoriesList();
-  }, [menuId]);
+  }, [idMenu]);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
