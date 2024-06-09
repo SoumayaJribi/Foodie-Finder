@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,6 +15,8 @@ import { Typography, Divider, Button, Box, Modal } from "@mui/material";
 import DeleteCat from "./DeleteCat";
 import EditCat from "./EditCat";
 import AddCat from "./AddCat";
+import axios from "axios";
+import { BASE_URL } from "../../../config";
 
 const style = {
   position: "absolute" as "absolute",
@@ -69,6 +71,7 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
   const handleClose = () => setOpen(false);
   const handleEditOpen = () => setEditOpen(true);
   const handleEditClose = () => setEditOpen(false);
+
   const handleDeleteOpen = (id) => {
     setDeleteId(id);
     setDeleteOpen(true);
@@ -90,11 +93,35 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
     setDeleteOpen(false);
   };
 
+  const handleGetMenuItems = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/restaurants/${categoryId}/menu-Items
+`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setRows(response.data);
+    } catch (error) {
+      console.log("error while getting menuItems", error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetMenuItems();
+  }, [categoryId]);
+
   return (
     <>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <AddCat closeEvent={handleClose} />
+          <AddCat closeEvent={handleClose} categoryId={categoryId} />
         </Box>
       </Modal>
 
