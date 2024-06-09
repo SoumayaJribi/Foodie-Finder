@@ -7,6 +7,8 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";
+import axios from "axios";
+import { BASE_URL } from "../../../config";
 
 export default function EditMenu({ closeEvent }) {
   const [name, setName] = useState("");
@@ -23,7 +25,26 @@ export default function EditMenu({ closeEvent }) {
     setImage(event.target.value);
   };
 
-  const creatUser = () => {};
+  //rihab
+  const handleEditMenu = async () => {
+    const token = localStorage.getItem("token ");
+
+    try {
+      const response = await axios.put(
+        `${BASE_URL}/...`,
+        { name, description, image },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      await console.log({ response });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -90,7 +111,7 @@ export default function EditMenu({ closeEvent }) {
           <Typography variant="h5" align="center">
             <Button
               variant="contained"
-              onClick={creatUser}
+              onClick={handleEditMenu}
               sx={{
                 backgroundColor: "#000000",
                 color: "#ffffff",

@@ -19,6 +19,9 @@ import {
 import SpecialMenuList from "./SpecialMenuList";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
+import { BASE_URL } from "../../../config";
+import { useEffect, useState } from "react";
 
 interface StyledTabsProps {
   children?: React.ReactNode;
@@ -98,7 +101,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function List() {
+export default function List({ menuId }: { menuId: string }) {
   const [value, setValue] = React.useState(0);
   const [tabs, setTabs] = React.useState([]); // Initial state is an empty array
   const [newTabLabel, setNewTabLabel] = React.useState<string>("");
@@ -108,6 +111,29 @@ export default function List() {
   const [isEditDialogOpen, setIsEditDialogOpen] = React.useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
   const [tabToDelete, setTabToDelete] = React.useState<number | null>(null);
+
+  const [categories, setCategories] = useState<any[]>([]);
+  console.log(categories);
+
+  const getGategoriesList = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.get(`${BASE_URL}/...../${menuId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setCategories(response.data);
+    } catch (error) {
+      console.log("error while getting categories", error);
+    }
+  };
+
+  useEffect(() => {
+    getGategoriesList();
+  }, [menuId]);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

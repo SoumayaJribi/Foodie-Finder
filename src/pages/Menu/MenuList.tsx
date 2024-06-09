@@ -61,6 +61,7 @@ export default function MenuList() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
   const editData = (id: any, name: any, description: any) => {
     const data = {
       id: id,
@@ -70,6 +71,7 @@ export default function MenuList() {
     //setMenuid(data);
     handleEditOpen();
   };
+
   const handleDeleteOpen = (id: number) => {
     setDeleteId(id);
     setDeleteOpen(true);
@@ -97,6 +99,7 @@ export default function MenuList() {
             <AddMenu closeEvent={handleClose} />
           </Box>
         </Modal>
+
         <Modal
           open={editopen}
           onClose={handleClose}
@@ -107,6 +110,7 @@ export default function MenuList() {
             <EditMenu closeEvent={handleEditClose} />
           </Box>
         </Modal>
+
         <Modal
           open={deleteOpen}
           onClose={handleDeleteClose}
@@ -124,6 +128,7 @@ export default function MenuList() {
           </Box>
         </Modal>
       </div>
+
       {rows.length > 0 && (
         <Paper
           style={{
@@ -181,6 +186,7 @@ export default function MenuList() {
             ></Typography>
           </Stack>
           <Box height={10} />
+
           <TableContainer>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -210,7 +216,7 @@ export default function MenuList() {
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       <TableCell align="left">
                         <img
-                          src={row.image}
+                          src={row?.image}
                           alt=""
                           style={{ width: "50px", height: "50px" }}
                         />
@@ -245,6 +251,7 @@ export default function MenuList() {
               </TableBody>
             </Table>
           </TableContainer>
+
           <TablePagination
             rowsPerPageOptions={[5, 10, 25, 100]}
             component="div"

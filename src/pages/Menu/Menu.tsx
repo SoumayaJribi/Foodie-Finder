@@ -4,7 +4,7 @@ import listemenu from "../../assets/listemenu.jpg";
 import List from "../Settings/List";
 
 export const Menu = () => {
-  const { id } = useParams();
+  const { menuId } = useParams();
   return (
     <div
       style={{
@@ -27,7 +27,7 @@ export const Menu = () => {
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Pour ajouter une ombre légère
         }}
       >
-        <List />
+        <List menuId={menuId} />
       </Box>
     </div>
   );

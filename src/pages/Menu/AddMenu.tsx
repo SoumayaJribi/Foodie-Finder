@@ -6,6 +6,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import axios from "axios";
+import { BASE_URL } from "../../../config";
 
 export default function AddMenu({ closeEvent }) {
   const [name, setName] = useState("");
@@ -22,8 +24,27 @@ export default function AddMenu({ closeEvent }) {
     setImage(event.target.files[0]);
   };
 
-  const creatUser = () => {
+
+  //rihab 
+  const handleCreateMenu = async () => {
     // Logique pour envoyer les données du nouveau restaurant avec l'image à l'API
+    const token = localStorage.getItem("token ");
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/...`,
+        { name, description, image },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      await console.log({ response });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -32,13 +53,16 @@ export default function AddMenu({ closeEvent }) {
       <Typography variant="h5" align="center">
         Ajouter dans Menu
       </Typography>
+
       <IconButton
         style={{ position: "absolute", top: "0", right: "0" }}
         onClick={closeEvent}
       >
         <CloseIcon />
       </IconButton>
+
       <Box height={20} />
+
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
@@ -51,6 +75,7 @@ export default function AddMenu({ closeEvent }) {
             sx={{ minWidth: "100%" }}
           />
         </Grid>
+
         <Grid item xs={12}>
           <TextField
             id="outlined-basic"
@@ -62,6 +87,7 @@ export default function AddMenu({ closeEvent }) {
             sx={{ minWidth: "100%" }}
           />
         </Grid>
+
         <Grid item xs={12}>
           <Typography variant="h6">Image:</Typography>
           <input
@@ -87,11 +113,12 @@ export default function AddMenu({ closeEvent }) {
             </Button>
           </label>
         </Grid>
+
         <Grid item xs={12}>
           <Typography variant="h5" align="center">
             <Button
               variant="contained"
-              onClick={creatUser}
+              onClick={handleCreateMenu}
               sx={{
                 backgroundColor: "#000000",
                 color: "#ffffff",
