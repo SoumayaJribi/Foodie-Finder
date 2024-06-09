@@ -6,13 +6,16 @@ import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useParams } from "react-router-dom";
+import { BASE_URL } from "../../../config";
+import axios from "axios";
 
-export default function AddCat({ closeEvent }) {
+export default function AddCat({ closeEvent, categoryId }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-
+  const { idMenu } = useParams();
   const handleNameChange = (event: any) => {
     setName(event.target.value);
   };
@@ -26,8 +29,22 @@ export default function AddCat({ closeEvent }) {
     setImage(event.target.files[0]);
   };
 
-  const creatUser = () => {
-    // Logique pour envoyer les données du nouveau restaurant avec l'image à l'API
+  const handleAddMenuItem = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      await axios.post(
+        `${BASE_URL}/restaurants/categories/${categoryId}/menu-items`,
+        { name, price: Number(price), description },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log("error while create menu item ", error);
+    }
   };
 
   return (
@@ -106,7 +123,7 @@ export default function AddCat({ closeEvent }) {
           <Typography variant="h5" align="center">
             <Button
               variant="contained"
-              onClick={creatUser}
+              onClick={handleAddMenuItem}
               sx={{
                 backgroundColor: "#000000",
                 color: "#ffffff",

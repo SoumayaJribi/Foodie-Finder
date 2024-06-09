@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import NotFound from "./Pfe/page/NotFound/NotFound";
 import MHome from "./Pfe/page/Menu/MHome/MHome";
 import Users from "./pages/Users";
@@ -25,8 +25,15 @@ import Demandes from "./pages/Demandes";
 import Orders from "./pages/Orders";
 import PlaceOrder from "./Pfe/page/PlaceOrder/PlaceOrder";
 import { UserProvider } from "./Pfe/PageAcc/Oppor/UserContext";
+import { useEffect } from "react";
 
 function App() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (!token) navigate("auth/login");
+  }, []);
   return (
     <UserProvider>
       <Routes>

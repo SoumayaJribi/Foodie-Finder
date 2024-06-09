@@ -34,7 +34,7 @@ const ForgotPassword = () => {
       return;
     }
 
-    Axios.post(`${BASE_URL}/auth/forgot-password`, { email })
+    Axios.post(`${BASE_URL}/auth/forget-password`, { email })
       .then((response) => {
         setMessage(
           "Un lien de réinitialisation a été envoyé à votre adresse e-mail."
@@ -42,9 +42,7 @@ const ForgotPassword = () => {
         setError("");
       })
       .catch((error) => {
-        setError(
-          "Impossible d'envoyer le lien de réinitialisation. Veuillez réessayer."
-        );
+        setError(error.message);
         setMessage("");
       });
   };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,6 +15,8 @@ import { Typography, Divider, Button, Box, Modal } from "@mui/material";
 import DeleteCat from "./DeleteCat";
 import EditCat from "./EditCat";
 import AddCat from "./AddCat";
+import { BASE_URL } from "../../../config";
+import axios from "axios";
 
 const style = {
   position: "absolute" as "absolute",
@@ -89,12 +91,35 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
     setRows(rows.filter((row) => row.id !== id));
     setDeleteOpen(false);
   };
+  const handleGetMenuItems = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/restaurants/${categoryId}/menu-Items
+`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setRows(response.data);
+    } catch (error) {
+      console.log("error while getting menuItems", error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetMenuItems();
+  }, [categoryId]);
 
   return (
     <>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <AddCat closeEvent={handleClose} />
+          <AddCat closeEvent={handleClose} categoryId={categoryId} />
         </Box>
       </Modal>
 
@@ -157,9 +182,7 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
                   <TableCell align="left" style={{ minWidth: "100px" }}>
                     Description
                   </TableCell>
-                  <TableCell align="left" style={{ minWidth: "100px" }}>
-                    Date
-                  </TableCell>
+
                   <TableCell align="left" style={{ minWidth: "100px" }}>
                     Action
                   </TableCell>
@@ -180,7 +203,6 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
                       <TableCell align="left">{row.name}</TableCell>
                       <TableCell align="left">{row.price}</TableCell>
                       <TableCell align="left">{row.description}</TableCell>
-                      <TableCell align="left">{row.date}</TableCell>
                       <TableCell align="left">
                         <Stack spacing={2} direction="row">
                           <EditIcon
