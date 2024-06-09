@@ -147,11 +147,27 @@ export default function List({ idMenu }: { idMenu: string }) {
     setIsNewTabDialogOpen(true);
   };
 
-  const handleAddNewTab = () => {
+  const handleAddNewTab = async () => {
     const newTab = {
-      label: newTabLabel,
-      component: <SpecialMenuList />,
+      name: newTabLabel,
     };
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/restaurants/menus/${idMenu}/categories`,
+        { name: newTabLabel },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log({ response });
+    } catch (error) {
+      console.log("error while getting categories", error);
+    }
 
     setTabs([...tabs, newTab]);
     setValue(tabs.length);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -126,6 +126,25 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
       console.log("error while getting menuItems", error);
     }
   };
+  const handleGetMenuItems = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/restaurants/${categoryId}/menu-Items
+`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setRows(response.data);
+    } catch (error) {
+      console.log("error while getting menuItems", error);
+    }
+  };
 
   useEffect(() => {
     handleGetMenuItems();
@@ -202,9 +221,7 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
                   <TableCell align="left" style={{ minWidth: "100px" }}>
                     Description
                   </TableCell>
-                  <TableCell align="left" style={{ minWidth: "100px" }}>
-                    Date
-                  </TableCell>
+
                   <TableCell align="left" style={{ minWidth: "100px" }}>
                     Action
                   </TableCell>
@@ -225,7 +242,6 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
                       <TableCell align="left">{row.name}</TableCell>
                       <TableCell align="left">{row.price}</TableCell>
                       <TableCell align="left">{row.description}</TableCell>
-                      <TableCell align="left">{row.date}</TableCell>
                       <TableCell align="left">
                         <Stack spacing={2} direction="row">
                           <EditIcon

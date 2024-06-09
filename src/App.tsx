@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useNavigate } from "react-router-dom";
 import NotFound from "./Pfe/page/NotFound/NotFound";
 import MHome from "./Pfe/page/Menu/MHome/MHome";
 import Users from "./pages/Users";
@@ -34,7 +34,6 @@ function App() {
   useEffect(() => {
     if (!token) navigate("auth/login");
   }, []);
-
   return (
     <UserProvider>
       <Routes>

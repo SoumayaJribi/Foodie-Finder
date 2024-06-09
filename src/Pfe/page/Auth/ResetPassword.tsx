@@ -18,7 +18,7 @@ const buttonStyle = {
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  //const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [searchParams] = useSearchParams();
@@ -27,18 +27,20 @@ const ResetPassword = () => {
   const resetToken = searchParams.get("token");
 
   const handlePasswordReset = () => {
-    if (!newPassword || !confirmPassword) {
+    if (!newPassword) {
       setError("Veuillez entrer et confirmer votre nouveau mot de passe.");
       return;
     }
 
-    if (newPassword !== confirmPassword) {
+    {
+      /*if (newPassword !== confirmPassword) {
       setError("Les mots de passe ne correspondent pas.");
       return;
+    }*/
     }
 
     Axios.post(`${BASE_URL}/auth/reset-password`, {
-      resetToken,
+      token: resetToken,
       newPassword,
     })
       .then((response) => {
@@ -85,14 +87,14 @@ const ResetPassword = () => {
               fullWidth
               margin="normal"
             />
-            <TextField
+            {/*<TextField
               label="Confirmer le mot de passe"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               fullWidth
               margin="normal"
-            />
+            />*/}
             {error && (
               <Typography variant="body2" color="error">
                 {error}
