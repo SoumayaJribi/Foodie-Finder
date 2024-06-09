@@ -11,7 +11,6 @@ import MHome from "./Pfe/page/Menu/MHome/MHome";
 import NotFound from "./Pfe/page/NotFound/NotFound";
 import PlaceOrder from "./Pfe/page/PlaceOrder/PlaceOrder";
 import FoodPreferenceForm from "./Pfe/page/PrefForm/FoodPreferenceForm";
-import RestaurantsPage from "./Pfe/page/Restaurant/RestaurantPage";
 import { MainLayout } from "./Pfe/page/main";
 import HomePage from "./Pfe/page/pagedacc/HomePage";
 import { Profile } from "./Pfe/page/profile";
@@ -48,7 +47,6 @@ function App() {
           <Route index element={<Home />} />
           <Route path="Prefform" element={<FoodPreferenceForm />} />
           <Route path="PHome" element={<HomePage />} />
-          <Route path="Restaurant" element={<RestaurantsPage />} />
           <Route path="restaurants">
             <Route index element={<Restaurants />} />
             <Route path=":id" element={<Resto />} />
