@@ -112,8 +112,7 @@ export default function List({ idMenu }: { idMenu: string }) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
   const [tabToDelete, setTabToDelete] = React.useState<number | null>(null);
 
-  const [categories, setCategories] = useState<any[]>([]);
-  console.log(categories);
+  console.log({ tabs });
 
   const getGategoriesList = async () => {
     const token = localStorage.getItem("token");
@@ -129,7 +128,7 @@ export default function List({ idMenu }: { idMenu: string }) {
         }
       );
 
-      setCategories(response.data);
+      setTabs(response.data);
     } catch (error) {
       console.log("error while getting categories", error);
     }
@@ -223,11 +222,7 @@ export default function List({ idMenu }: { idMenu: string }) {
               aria-label="basic tabs example"
             >
               {tabs.map((tab, index) => (
-                <StyledTab
-                  key={index}
-                  label={tab.label}
-                  {...a11yProps(index)}
-                />
+                <StyledTab key={index} label={tab.name} {...a11yProps(index)} />
               ))}
             </StyledTabs>
             <Button
@@ -255,7 +250,7 @@ export default function List({ idMenu }: { idMenu: string }) {
                   alignItems: "center",
                 }}
               >
-                {tab.component}
+                {<SpecialMenuList categoryId={tab.id} />}
                 <Box>
                   <IconButton onClick={() => handleOpenEditDialog(index)}>
                     <EditIcon />

@@ -55,7 +55,8 @@ const mockData = [
   },
 ];
 
-const SpecialMenuList = () => {
+const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
+  console.log({ categoryId });
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState(mockData);
