@@ -58,7 +58,7 @@ const mockData = [
 ];
 
 const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
-  console.log({ categoryId });
+  const token = localStorage.getItem("token");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState(mockData);
@@ -76,26 +76,40 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
     setDeleteId(id);
     setDeleteOpen(true);
   };
+
   const handleDeleteClose = () => {
     setDeleteOpen(false);
     setDeleteId(null);
   };
+
   const handleChangePage = (_event, newPage) => {
     setPage(newPage);
   };
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
-  const deletePlat = (id) => {
-    setRows(rows.filter((row) => row.id !== id));
-    setDeleteOpen(false);
+  // waiting for backend fix
+  const handleDeleteMenuItem = async (id) => {
+    try {
+      await axios.delete(
+        `${BASE_URL}/restaurants/${categoryId}/${id}
+`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setRows(rows.filter((row) => row.id !== id));
+    } catch (error) {
+      console.log("error while deleting menuItem", error);
+    }
   };
 
   const handleGetMenuItems = async () => {
-    const token = localStorage.getItem("token");
-
     try {
       const response = await axios.get(
         `${BASE_URL}/restaurants/${categoryId}/menu-Items
@@ -133,7 +147,11 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
 
       <Modal open={deleteOpen} onClose={handleDeleteClose}>
         <Box sx={style}>
-          <DeleteCat closeEvent={handleDeleteClose} />
+          <DeleteCat
+            closeEvent={handleDeleteClose}
+            deleteEvent={handleDeleteMenuItem}
+            id={categoryId}
+          />
         </Box>
       </Modal>
 

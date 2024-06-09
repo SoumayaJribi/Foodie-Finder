@@ -10,7 +10,7 @@ import { saveOrUpdateStorage } from "../../../../helpers/functions";
 interface FoodItemProps {
   id: number;
   name: string;
-  price: string;
+  price: number;
   description: string;
   image: string;
 }
@@ -25,6 +25,7 @@ const FoodItem: React.FC<FoodItemProps> = ({
   const context = useContext<StoreContextProps | null>(StoreContext);
   const [count, setCount] = useState(0);
   // Vérifiez que le contexte n'est pas null
+
   if (!context) {
     return <div>Loading...</div>;
   }
@@ -32,12 +33,14 @@ const FoodItem: React.FC<FoodItemProps> = ({
   const onAdd = () => {
     setCount((prev) => prev + 1);
   };
+
   const onRemove = () => {
     setCount((prev) => {
       if (prev > 0) return prev - 1;
       else return prev;
     });
   };
+
   const onSubmit = () => {
     saveOrUpdateStorage("cart", {
       count,

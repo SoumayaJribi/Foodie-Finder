@@ -19,9 +19,9 @@ const style = {
 };
 
 interface DeleteCatProps {
-  id: number;
+  id: number | string;
   closeEvent: () => void;
-  deleteEvent: (id: number) => void;
+  deleteEvent: (id: number | string) => void;
 }
 
 const DeleteCat: React.FC<DeleteCatProps> = ({

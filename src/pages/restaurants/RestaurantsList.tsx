@@ -78,11 +78,12 @@ export default function restaurantsList() {
   const [data, setData] = useState([]);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-
   const [editopen, setEditOpen] = useState(false);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
   const handleEditOpen = () => setEditOpen(true);
   const handleEditClose = () => setEditOpen(false);
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -94,7 +95,7 @@ export default function restaurantsList() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const navigate = useNavigate();
+
   const editData = (
     id: any,
     name: any,
@@ -119,6 +120,7 @@ export default function restaurantsList() {
     //setMenuid(data);
     handleEditOpen();
   };
+
   const handleDeleteOpen = (id: number) => {
     setDeleteId(id);
     setDeleteOpen(true);
@@ -129,13 +131,20 @@ export default function restaurantsList() {
     setDeleteId(null);
   };
 
-  const deleteRestaurant = (id: number) => {
-    setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+  const deleteRestaurant = async (id: number) => {
+    try {
+      await axios.delete(`${BASE_URL}/restaurants/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+    } catch (error) {
+      console.error("Error while deleting restaurent menu:", error);
+    }
   };
 
   const fetchRestaurantMenu = async () => {
-    const token = localStorage.getItem("token");
-
     try {
       const response = await axios.get(`${BASE_URL}/restaurants`, {
         headers: {
@@ -145,14 +154,14 @@ export default function restaurantsList() {
 
       setData(response.data);
     } catch (error) {
-      console.error("Error fetching user profile:", error);
+      console.error("Error fetching restaurent menu:", error);
     }
   };
 
   useEffect(() => {
     fetchRestaurantMenu();
   }, []);
-  
+
   console.log(data);
   return (
     <>

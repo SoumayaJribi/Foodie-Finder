@@ -6,8 +6,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import axios from "axios";
+import { BASE_URL } from "../../../config";
+import { useParams } from "react-router-dom";
 
 export default function EditCat({ closeEvent }) {
+  const { id } = useParams();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -26,8 +30,27 @@ export default function EditCat({ closeEvent }) {
     setImage(event.target.value);
   };
 
-  const creatUser = () => {
-    // Ajoutez ici la logique pour soumettre les modifications avec l'URL de l'image
+  const handleEditCategory = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      await axios.put(
+        `${BASE_URL}/restaurants/${id}/category`,
+        {
+          name,
+          price,
+          description,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log("error while updating category");
+    }
+
   };
 
   return (
@@ -106,7 +129,7 @@ export default function EditCat({ closeEvent }) {
           <Typography variant="h5" align="center">
             <Button
               variant="contained"
-              onClick={creatUser}
+              onClick={handleEditCategory}
               sx={{
                 backgroundColor: "#000000",
                 color: "#ffffff",

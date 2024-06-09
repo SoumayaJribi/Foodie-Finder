@@ -42,8 +42,11 @@ const mockData = [
 ];
 
 export default function MenuList() {
-  const { id } = useParams();
-  console.log({ id });
+  const token = localStorage.getItem("token");
+
+  const { id, menuId } = useParams();
+  const navigate = useNavigate();
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState(mockData);
@@ -52,6 +55,7 @@ export default function MenuList() {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [data, setData] = useState([]);
   const [deleteId, setDeleteId] = useState<number | null>(null);
+
   const handleEditOpen = () => setEditOpen(true);
   const handleEditClose = () => setEditOpen(false);
   const handleOpen = () => setOpen(true);
@@ -65,6 +69,17 @@ export default function MenuList() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const handleDeleteOpen = (id: number) => {
+    setDeleteId(id);
+    setDeleteOpen(true);
+  };
+
+  const handleDeleteClose = () => {
+    setDeleteOpen(false);
+    setDeleteId(null);
+  };
+
   const editData = (id: any, image: any, name: any, description: any) => {
     const data = {
       id: id,
@@ -76,23 +91,20 @@ export default function MenuList() {
     handleEditOpen();
   };
 
-  const handleDeleteOpen = (id: number) => {
-    setDeleteId(id);
-    setDeleteOpen(true);
+  const deleteMenu = async (id: number) => {
+    try {
+      await axios.delete(`${BASE_URL}/restaurants/delete/${id}/${menuId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
   };
 
-  const handleDeleteClose = () => {
-    setDeleteOpen(false);
-    setDeleteId(null);
-  };
-  const navigate = useNavigate();
-
-  const deleteMenu = (id: number) => {
-    setRows((prevRows) => prevRows.filter((row) => row.id !== id));
-  };
   const fetchMenu = async () => {
-    const token = localStorage.getItem("token");
-
     try {
       const response = await axios.get(`${BASE_URL}/restaurants/${id}/menus`, {
         headers: {
@@ -105,10 +117,10 @@ export default function MenuList() {
       console.error("Error fetching user profile:", error);
     }
   };
+
   useEffect(() => {
     fetchMenu();
   }, [id]);
-  console.log(data);
 
   return (
     <>

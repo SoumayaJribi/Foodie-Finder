@@ -45,7 +45,7 @@ export default function EditRestaurants({ closeEvent }: any) {
     setImage(event.target.files[0]);
   };
 
-  const createUser = () => {
+  const handleAddRestaurant = () => {
     const token = localStorage.getItem("token");
     Axios.post(
       `${BASE_URL}/restaurants/register`,
@@ -198,7 +198,7 @@ export default function EditRestaurants({ closeEvent }: any) {
           <Typography variant="h5" align="center">
             <Button
               variant="contained"
-              onClick={createUser}
+              onClick={handleAddRestaurant}
               sx={{
                 backgroundColor: "#000000",
                 color: "#ffffff",

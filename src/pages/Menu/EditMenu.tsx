@@ -1,16 +1,18 @@
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import InputAdornment from "@mui/material/InputAdornment";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../../config";
 
 export default function EditMenu({ closeEvent }) {
+  const token = localStorage.getItem("token ");
+  const { id, menuId } = useParams();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
@@ -25,13 +27,10 @@ export default function EditMenu({ closeEvent }) {
     setImage(event.target.value);
   };
 
-  //rihab
   const handleEditMenu = async () => {
-    const token = localStorage.getItem("token ");
-
     try {
-      const response = await axios.put(
-        `${BASE_URL}/...`,
+      await axios.put(
+        `${BASE_URL}/restaurants/update/${id}/${menuId}`,
         { name, description, image },
         {
           headers: {
@@ -39,8 +38,6 @@ export default function EditMenu({ closeEvent }) {
           },
         }
       );
-
-      await console.log({ response });
     } catch (error) {
       console.log(error);
     }
