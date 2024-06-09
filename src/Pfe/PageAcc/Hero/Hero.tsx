@@ -27,15 +27,14 @@ function Hero({ setSearchData }: props) {
           },
         }
       );
-      console.log(response);
-      await setSearchData(response?.data);
+      await setSearchData(response.data);
     } catch (error) {
       console.log({ error });
     }
   };
 
   useEffect(() => {
-    handleSearch();
+    if (search) handleSearch();
   }, [search]);
 
   return (

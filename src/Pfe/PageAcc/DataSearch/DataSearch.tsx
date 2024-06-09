@@ -9,7 +9,7 @@ type item = {
   email: string;
   openingHours: string;
   cuisineType: string;
-  imageUrl: string | null;
+  imageUrl: string;
   status: "APPROVED";
   ownerId: number;
 };
@@ -27,12 +27,12 @@ const DataSearch = ({ data }: props) => {
         {data.map((item) => {
           return (
             <div className="card">
-              <img src={resto} />
-              <span className="cuisine-type">Type : {item.cuisineType}</span>
-              <p className="name">Name : {item.name}</p>
-              <p className="address">Address : {item.adress}</p>
+              <img src={item?.imageUrl || resto} />
+              <span className="cuisine-type">Type : {item?.cuisineType}</span>
+              <p className="name">Name : {item?.name}</p>
+              <p className="address">Address : {item?.adress}</p>
               <p className="opening-hours">
-                Opening hours : {item.openingHours}
+                Opening hours : {item?.openingHours}
               </p>
             </div>
           );

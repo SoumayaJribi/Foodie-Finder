@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 import listemenu from "../../assets/listemenu.jpg";
 
 export const Resto = () => {
-  const { id } = useParams();
   return (
     <div
       style={{

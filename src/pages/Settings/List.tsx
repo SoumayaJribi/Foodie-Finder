@@ -98,7 +98,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function List() {
+export default function List({ idMenu }: { idMenu: string }) {
   const [value, setValue] = React.useState(0);
   const [tabs, setTabs] = React.useState([]); // Initial state is an empty array
   const [newTabLabel, setNewTabLabel] = React.useState<string>("");

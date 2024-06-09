@@ -20,7 +20,7 @@ import EditMenu from "./EditMenu";
 import DeleteMenu from "./DeleteMenu";
 import { BASE_URL } from "../../../config";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const style = {
   position: "absolute" as "absolute",
@@ -42,6 +42,8 @@ const mockData = [
 ];
 
 export default function MenuList() {
+  const { id } = useParams();
+  console.log({ id });
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState(mockData);
@@ -91,7 +93,7 @@ export default function MenuList() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.get(`${BASE_URL}/restaurants/:id/menus`, {
+      const response = await axios.get(`${BASE_URL}/restaurants/${id}/menus`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -104,7 +106,7 @@ export default function MenuList() {
   };
   useEffect(() => {
     fetchMenu();
-  }, []);
+  }, [id]);
   console.log(data);
 
   return (
@@ -221,7 +223,7 @@ export default function MenuList() {
                     tabIndex={-1}
                     key={row.id}
                     onClick={() => {
-                      navigate(`/restaurants/:id/menus/${row?.id}`);
+                      navigate(`/restaurants/${id}/menus/${row?.id}`);
                     }}
                   >
                     <TableCell align="left">
