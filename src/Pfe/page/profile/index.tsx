@@ -18,6 +18,8 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Row } from "../../../components/Box";
 import { useAuth } from "../../../context/auth";
+import axios from "axios";
+import { BASE_URL } from "../../../../config";
 
 const buttonStyle = {
   backgroundColor: "#f5c542",
@@ -37,6 +39,7 @@ const Profile = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const { user } = useAuth();
+  const token = localStorage.getItem("token");
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -59,19 +62,54 @@ const Profile = () => {
     setConfirmPassword(e.target.value);
   };
 
-  const handleSubmitPasswordChange = () => {
-    if (newPassword !== confirmPassword) {
-      alert("Les mots de passe ne correspondent pas.");
-      return;
+  const handleSubmitPasswordChange = async () => {
+    if (newPassword && confirmPassword && oldPassword) {
+      try {
+        const response = await axios.patch(
+          `${BASE_URL}/users/change-password`,
+          {
+            currentPassword: oldPassword,
+            newPassword: newPassword,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log({ response });
+      } catch (error) {
+        console.log({ error });
+      }
     }
-
-    // Ajouter la logique de mise à jour du mot de passe ici
-
     setOldPassword("");
     setNewPassword("");
     setConfirmPassword("");
     setChangePassword(false);
-    alert("Mot de passe changé avec succès.");
+  };
+
+  const handleChangeNameEmail = async () => {
+    if (profile.Name && profile.email) {
+      try {
+        const response = await axios.patch(
+          `${BASE_URL}/users/updateProfil`,
+          {
+            username: profile.Name,
+            email: profile.email,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log({ response });
+      } catch (error) {
+        console.log({ error });
+      }
+    }
   };
 
   const toggleShowOldPassword = () => {
@@ -104,7 +142,10 @@ const Profile = () => {
           <Button
             variant="contained"
             style={buttonStyle}
-            onClick={() => setIsEditing(!isEditing)}
+            onClick={() => {
+              setIsEditing(!isEditing);
+              handleChangeNameEmail();
+            }}
           >
             {isEditing ? "Enregistrer" : "Modifier"}
           </Button>

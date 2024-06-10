@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./OpporStyle.css";
 
@@ -18,9 +18,16 @@ const OpporData: React.FC<OpporDataProps> = ({
   link,
 }) => {
   const navigate = useNavigate();
+  const [message, setMessage] = useState("");
+
+  const role = localStorage.getItem("role");
 
   const handleClick = () => {
-    navigate(link);
+    if (role === "Restaurateur" || role === "Admin") {
+      navigate(link);
+    } else {
+      setMessage("You dont have permission to visit this route!");
+    }
   };
 
   return (
@@ -33,6 +40,8 @@ const OpporData: React.FC<OpporDataProps> = ({
       <button className="action-button" onClick={handleClick}>
         {buttonText}
       </button>
+
+      {message && <p style={{ color: "red" }}>{message}</p>}
     </div>
   );
 };
