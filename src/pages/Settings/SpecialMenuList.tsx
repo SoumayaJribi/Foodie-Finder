@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -19,7 +21,7 @@ import DeleteCat from "./DeleteCat";
 import EditCat from "./EditCat";
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -34,18 +36,18 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
   const token = localStorage.getItem("token");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [rows, setRows] = useState(mockData);
+  const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-
+  console.log(deleteId);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleEditOpen = () => setEditOpen(true);
   const handleEditClose = () => setEditOpen(false);
 
-  const handleDeleteOpen = (id) => {
+  const handleDeleteOpen = (id: any) => {
     setDeleteId(id);
     setDeleteOpen(true);
   };
@@ -55,17 +57,17 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
     setDeleteId(null);
   };
 
-  const handleChangePage = (_event, newPage) => {
+  const handleChangePage = (_event: any, newPage: any) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event: any) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
   // waiting for backend fix
-  const handleDeleteMenuItem = async (id) => {
+  const handleDeleteMenuItem = async (id: any) => {
     try {
       await axios.delete(
         `${BASE_URL}/restaurants/${categoryId}/${id}
@@ -76,7 +78,7 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
           },
         }
       );
-      setRows(rows.filter((row) => row.id !== id));
+      setRows((rows || [])?.filter((row: any) => row?.id !== id) || []);
     } catch (error) {
       console.log("error while deleting menuItem", error);
     }
@@ -130,7 +132,7 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
         </Box>
       </Modal>
 
-      {rows.length > 0 && (
+      {(rows || [])?.length > 0 && (
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <Box
             sx={{
@@ -184,9 +186,9 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows
+                {(rows || [])
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => (
+                  .map((row: any) => (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       <TableCell align="left">
                         <img

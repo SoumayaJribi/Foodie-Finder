@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { StoreContext } from "../Menu/context/StoreContext";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import "./Cart.css";
 import {
   getStorage,
@@ -14,14 +14,8 @@ import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useNavigate } from "react-router-dom";
 const Cart = () => {
-  const context = useContext(StoreContext);
-  const [foodList, setFoodList] = useState(getStorage("cart"));
-  if (!context) {
-    return null;
-  }
-
-  const { cartItems } = context;
   const Navigate = useNavigate();
+  const [foodList, setFoodList] = useState(getStorage("cart"));
 
   return (
     <div

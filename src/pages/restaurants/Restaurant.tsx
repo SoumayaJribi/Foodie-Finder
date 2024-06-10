@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import MenuList from "../Menu/MenuList";
 import { Box } from "@mui/material";
 import listemenu from "../../assets/listemenu.jpg";

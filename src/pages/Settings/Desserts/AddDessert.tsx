@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -7,12 +8,12 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-export default function AddDessert({ closeEvent }) {
+export default function AddDessert({ closeEvent }: any) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-
+  console.log(image);
   const handleNameChange = (event: any) => {
     setName(event.target.value);
   };

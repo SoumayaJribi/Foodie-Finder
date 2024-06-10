@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./Pfe/PageAcc/Home";
@@ -13,7 +14,7 @@ import PlaceOrder from "./Pfe/page/PlaceOrder/PlaceOrder";
 import FoodPreferenceForm from "./Pfe/page/PrefForm/FoodPreferenceForm";
 import { MainLayout } from "./Pfe/page/main";
 import HomePage from "./Pfe/page/pagedacc/HomePage";
-import Index from "./Pfe/page/profile/Index";
+import Index from "./Pfe/page/profile";
 import DaHome from "./pages/DaHome";
 import DaMenu from "./pages/DaMenu";
 import Demandes from "./pages/Demandes";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, TextField, Typography, Grid, Paper } from "@mui/material";
 import Axios from "axios";
 import backgL from "../../../assets/backgL.jpg";
@@ -26,7 +26,6 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
 
   const handlePasswordReset = () => {
     if (!email) {
@@ -35,7 +34,7 @@ const ForgotPassword = () => {
     }
 
     Axios.post(`${BASE_URL}/auth/forget-password`, { email })
-      .then((response) => {
+      .then(() => {
         setMessage(
           "Un lien de réinitialisation a été envoyé à votre adresse e-mail."
         );

@@ -43,12 +43,12 @@ const ResetPassword = () => {
       token: resetToken,
       newPassword,
     })
-      .then((response) => {
+      .then(() => {
         setMessage("Votre mot de passe a été réinitialisé avec succès.");
         setError("");
         setTimeout(() => navigate("/auth/login"), 3000);
       })
-      .catch((error) => {
+      .catch(() => {
         setError(
           "Impossible de réinitialiser le mot de passe. Veuillez réessayer."
         );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -8,10 +9,10 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-export default function EditUser({ closeEvent }) {
+export default function EditUser({ closeEvent }: any) {
   const [role, setRole] = useState("");
 
-  const handleRoleChange = (event) => {
+  const handleRoleChange = (event: any) => {
     setRole(event.target.value);
   };
 

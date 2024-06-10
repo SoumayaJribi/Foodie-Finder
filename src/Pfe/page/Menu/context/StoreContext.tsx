@@ -1,4 +1,5 @@
-import React, { createContext, useEffect, useState, ReactNode } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { createContext, useState, ReactNode } from "react";
 import { food_list } from "../../../../assets/assets"; // Ensure this path is correct
 
 // Define the type for the items in the cart
@@ -52,24 +53,13 @@ const StoreContextProvider: React.FC<StoreContextProviderProps> = (props) => {
       return newCartItems;
     });
   };
-  const getTotalCartAmount = () => {
-    let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = food_list.find((product) => product._id === item);
-        totalAmount += itemInfo.price * cartItems[item];
-      }
-    }
-    return totalAmount;
-  };
 
   const contextValue: StoreContextProps = {
-    food_list,
+    food_list: food_list as any,
     cartItems,
     setCartItems,
     addToCart,
     removeFromCart,
-    getTotalCartAmount,
   };
 
   return (

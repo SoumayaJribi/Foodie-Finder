@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,12 +16,9 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import EditOrder from "./EditOrder";
 import DeleteOrder from "./DeleteOrder";
-//import axios from "axios";
-//import { BASE_URL } from "../../../config";
-//import { useNavigate } from "react-router-dom";
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -69,6 +67,7 @@ export default function DemandeList() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState(mockData);
   const [open, setOpen] = useState(false);
+  console.log(open);
   //const [data, setData] = useState(null);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<number | null>(null);
@@ -77,10 +76,10 @@ export default function DemandeList() {
   const handleEditOpen = () => setEditOpen(true);
   const handleEditClose = () => setEditOpen(false);
 
-  const handleOpen = () => setOpen(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -89,26 +88,7 @@ export default function DemandeList() {
     setPage(0);
   };
   //const navigate = useNavigate();
-  const editData = (
-    id: any,
-    orderNum: any,
-    name: any,
-    phone: any,
-    adress: any,
-    orderDetails: any,
-    price: any,
-    statut: any
-  ) => {
-    const data = {
-      id: id,
-      orderNum: orderNum,
-      name: name,
-      address: adress,
-      phoneNumber: phone,
-      orderDetails: orderDetails,
-      price: price,
-      statut: statut,
-    };
+  const editData = () => {
     //setMenuid(data);
     handleEditOpen();
   };
@@ -259,16 +239,7 @@ export default function DemandeList() {
                               cursor: "pointer",
                             }}
                             onClick={() => {
-                              editData(
-                                row.id,
-                                row.name,
-                                row.orderDetails,
-                                row.adress,
-                                row.phone,
-                                row.orderNum,
-                                row.price,
-                                row.statut
-                              );
+                              editData();
                             }}
                           />
                           <DeleteIcon

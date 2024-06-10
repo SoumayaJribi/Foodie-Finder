@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CloseIcon from "@mui/icons-material/Close";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,7 +11,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../../config";
 
-export default function EditMenu({ closeEvent }) {
+export default function EditMenu({ closeEvent }: any) {
   const token = localStorage.getItem("token ");
   const { id, menuId } = useParams();
   const [name, setName] = useState("");
@@ -23,7 +24,7 @@ export default function EditMenu({ closeEvent }) {
   const handleDescriptionChange = (event: any) => {
     setDescription(event.target.value);
   };
-  const handleImageChange = (event) => {
+  const handleImageChange = (event: any) => {
     setImage(event.target.value);
   };
 

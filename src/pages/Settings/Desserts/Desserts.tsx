@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -22,7 +23,7 @@ import AddDessert from "./AddDessert";
 import DeleteDessert from "./DeleteDessert";
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -55,7 +56,7 @@ export default function Desserts() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -64,20 +65,7 @@ export default function Desserts() {
     setPage(0);
   };
 
-  const editData = (
-    id: any,
-    name: any,
-    price: any,
-    description: any,
-    date: any
-  ) => {
-    const data = {
-      id: id,
-      name: name,
-      price: price,
-      description: description,
-      date: date,
-    };
+  const editData = () => {
     //setMenuid(data);
     handleEditOpen();
   };
@@ -215,7 +203,7 @@ export default function Desserts() {
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       <TableCell align="left">
                         <img
-                          src={row.image}
+                          src={row?.image || ""}
                           alt=""
                           style={{ width: "50px", height: "50px" }}
                         />
@@ -233,13 +221,7 @@ export default function Desserts() {
                               cursor: "pointer",
                             }}
                             onClick={() => {
-                              editData(
-                                row.id,
-                                row.name,
-                                row.price,
-                                row.description,
-                                row.date
-                              );
+                              editData();
                             }}
                           />
                           <DeleteIcon

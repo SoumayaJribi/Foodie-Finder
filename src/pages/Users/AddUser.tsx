@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -7,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-export default function AddUser({ closeEvent }) {
+export default function AddUser({ closeEvent }: any) {
   const [id, setId] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -23,7 +25,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -61,7 +63,7 @@ export default function MenuList() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -80,13 +82,7 @@ export default function MenuList() {
     setDeleteId(null);
   };
 
-  const editData = (id: any, image: any, name: any, description: any) => {
-    const data = {
-      id: id,
-      image: image,
-      name: name,
-      description: description,
-    };
+  const editData = () => {
     //setMenuid(data);
     handleEditOpen();
   };
@@ -261,7 +257,7 @@ export default function MenuList() {
                             cursor: "pointer",
                           }}
                           onClick={() => {
-                            editData(row.id, row.image, row.name, row.email);
+                            editData();
                           }}
                         />
                         <DeleteIcon

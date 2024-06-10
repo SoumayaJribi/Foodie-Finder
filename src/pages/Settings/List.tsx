@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -21,7 +23,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { BASE_URL } from "../../../config";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface StyledTabsProps {
   children?: React.ReactNode;
@@ -103,7 +105,7 @@ function a11yProps(index: number) {
 
 export default function List({ idMenu }: { idMenu: string }) {
   const [value, setValue] = React.useState(0);
-  const [tabs, setTabs] = React.useState([]); // Initial state is an empty array
+  const [tabs, setTabs] = React.useState<any>([]);
   const [newTabLabel, setNewTabLabel] = React.useState<string>("");
   const [editIndex, setEditIndex] = React.useState<number | null>(null);
   const [editLabel, setEditLabel] = React.useState<string>("");
@@ -179,7 +181,7 @@ export default function List({ idMenu }: { idMenu: string }) {
 
   const handleDeleteTab = () => {
     if (tabToDelete !== null) {
-      setTabs(tabs.filter((_, i) => i !== tabToDelete));
+      setTabs(tabs.filter((_: any, i: number) => i !== tabToDelete));
       if (value === tabToDelete && tabToDelete === tabs.length - 1) {
         setValue(tabToDelete - 1);
       } else if (value > tabToDelete) {
@@ -198,7 +200,7 @@ export default function List({ idMenu }: { idMenu: string }) {
 
   const handleEditTab = () => {
     if (editIndex !== null) {
-      const updatedTabs = tabs.map((tab, index) =>
+      const updatedTabs = tabs.map((tab: any, index: number) =>
         index === editIndex ? { ...tab, label: editLabel } : tab
       );
       setTabs(updatedTabs);
@@ -235,8 +237,12 @@ export default function List({ idMenu }: { idMenu: string }) {
               onChange={handleChange}
               aria-label="basic tabs example"
             >
-              {tabs.map((tab, index) => (
-                <StyledTab key={index} label={tab.name} {...a11yProps(index)} />
+              {tabs.map((tab: any, index: number) => (
+                <StyledTab
+                  key={index}
+                  label={(tab as any)?.name || ""}
+                  {...a11yProps(index)}
+                />
               ))}
             </StyledTabs>
             <Button
@@ -255,7 +261,7 @@ export default function List({ idMenu }: { idMenu: string }) {
               Ajouter une catégorie
             </Button>
           </Box>
-          {tabs.map((tab, index) => (
+          {tabs.map((tab: any, index: number) => (
             <CustomTabPanel key={index} value={value} index={index}>
               <Box
                 sx={{
@@ -264,7 +270,7 @@ export default function List({ idMenu }: { idMenu: string }) {
                   alignItems: "center",
                 }}
               >
-                {<SpecialMenuList categoryId={tab.id} />}
+                {<SpecialMenuList categoryId={tab?.id || ""} />}
                 <Box>
                   <IconButton onClick={() => handleOpenEditDialog(index)}>
                     <EditIcon />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -8,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem"; // Importez MenuItem
 
-export default function EditOrder({ closeEvent }) {
+export default function EditOrder({ closeEvent }: any) {
   const [statut, setStatut] = useState("");
 
   const handleStatutChange = (event: any) => {

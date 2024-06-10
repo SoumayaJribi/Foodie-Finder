@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -9,7 +10,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { BASE_URL } from "../../../config";
 
-export default function AddMenu({ closeEvent }) {
+export default function AddMenu({ closeEvent }: any) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -24,8 +25,7 @@ export default function AddMenu({ closeEvent }) {
     setImage(event.target.files[0]);
   };
 
-
-  //rihab 
+  //rihab
   const handleCreateMenu = async () => {
     // Logique pour envoyer les données du nouveau restaurant avec l'image à l'API
     const token = localStorage.getItem("token ");

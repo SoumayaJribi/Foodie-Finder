@@ -12,7 +12,7 @@ import "../Dash.css";
 //import CreditCardIcon from "@mui/icons-material/CreditCard";
 //import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 //import Barchart from "../charts/Barchart";
-import Index from "../Pfe/page/profile/Index";
+import Index from "../Pfe/page/profile";
 
 export default function DaHome() {
   return (

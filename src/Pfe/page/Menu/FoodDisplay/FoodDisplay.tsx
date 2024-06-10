@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BASE_URL } from "../../../../../config";
 import FoodItem from "../FoodItem/FoodItem";
-import { StoreContext } from "../context/StoreContext";
 import "./FoodDisplay.css";
 
 type menuItemType = {
@@ -16,10 +16,8 @@ type menuItemType = {
   categoryId: number;
 };
 
-const FoodDisplay = ({ category }) => {
-  const { food_list } = useContext(StoreContext);
+const FoodDisplay = ({ category }: any) => {
   const [itemMenuList, setItemMenuList] = useState<menuItemType[]>([]);
-
   const fetchItemsMenu = async () => {
     const token = localStorage.getItem("token");
 
@@ -43,7 +41,7 @@ const FoodDisplay = ({ category }) => {
     <div className="food-display" id="food-display">
       <h2>Top dishes near you</h2>
       <div className="food-display-list">
-        {food_list.map((item, index) => {
+        {itemMenuList.map((item: any, index: number) => {
           if (category == "All" || category === item.category)
             return (
               <FoodItem

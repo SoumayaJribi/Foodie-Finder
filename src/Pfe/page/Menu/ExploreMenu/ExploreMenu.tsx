@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { menu_list, restaurant_list } from "../../../../assets/assets";
 import FoodDisplay from "../FoodDisplay/FoodDisplay";
@@ -39,7 +40,7 @@ const ExploreMenu: React.FC<ExploreMenuProps> = ({ category, setCategory }) => {
   const [selectedRestaurant, setSelectedRestaurant] = useState<string | null>(
     null
   );
-
+  console.log(restaurantsData, menusData);
   const handleRestaurantClick = (restaurantName: string) => {
     if (selectedRestaurant === restaurantName) {
       setSelectedRestaurant(null);

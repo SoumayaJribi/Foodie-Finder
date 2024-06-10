@@ -12,7 +12,7 @@ export default function Settings() {
         <Box sx={{ display: "flex" }}>
           <Sidenav />
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            <List />
+            <List idMenu="" />
           </Box>
         </Box>
       </div>

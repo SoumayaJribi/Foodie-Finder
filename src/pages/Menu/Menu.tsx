@@ -27,7 +27,7 @@ export const Menu = () => {
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Pour ajouter une ombre légère
         }}
       >
-        <List idMenu={idMenu} />
+        <List idMenu={idMenu || ""} />
       </Box>
     </div>
   );

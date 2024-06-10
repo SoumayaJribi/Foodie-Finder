@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -23,7 +25,7 @@ import { BASE_URL } from "../../../config";
 import { useNavigate } from "react-router-dom";
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -70,7 +72,7 @@ const mockData = [
   },
   // Add more mock data as needed
 ];
-export default function restaurantsList() {
+export default function RestaurantsList() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState(mockData);
@@ -87,7 +89,7 @@ export default function restaurantsList() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -96,27 +98,7 @@ export default function restaurantsList() {
     setPage(0);
   };
 
-  const editData = (
-    id: any,
-    name: any,
-    phoneNumber: any,
-    address: any,
-    email: any,
-    cuisineType: any,
-    openingHours: any,
-
-    status: any
-  ) => {
-    const data = {
-      id: id,
-      name: name,
-      address: address,
-      email: email,
-      openingHours: openingHours,
-      cuisineType: cuisineType,
-      phoneNumber: phoneNumber,
-      status: status,
-    };
+  const editData = () => {
     //setMenuid(data);
     handleEditOpen();
   };
@@ -309,16 +291,7 @@ export default function restaurantsList() {
                             cursor: "pointer",
                           }}
                           onClick={() => {
-                            editData(
-                              row.id,
-                              row.name,
-                              row.email,
-                              row.address,
-                              row.phoneNumber,
-                              row.cuisineType,
-                              row.openingHours,
-                              row.status
-                            );
+                            editData();
                           }}
                         />
                         <DeleteIcon

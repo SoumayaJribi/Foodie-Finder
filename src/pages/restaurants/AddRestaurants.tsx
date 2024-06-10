@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -9,7 +10,7 @@ import Button from "@mui/material/Button";
 import Axios from "axios";
 import { BASE_URL } from "../../../config";
 
-export default function AddRestaurants({ closeEvent }) {
+export default function AddRestaurants({ closeEvent }: any) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [adress, setAdress] = useState("");

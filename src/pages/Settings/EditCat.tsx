@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -10,13 +11,13 @@ import axios from "axios";
 import { BASE_URL } from "../../../config";
 import { useParams } from "react-router-dom";
 
-export default function EditCat({ closeEvent }) {
+export default function EditCat({ closeEvent }: any) {
   const { id } = useParams();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-
+  console.log(image);
   const handleNameChange = (event: any) => {
     setName(event.target.value);
   };
@@ -50,7 +51,6 @@ export default function EditCat({ closeEvent }) {
     } catch (error) {
       console.log("error while updating category");
     }
-
   };
 
   return (

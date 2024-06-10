@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CloseIcon from "@mui/icons-material/Close";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -9,12 +10,12 @@ import axios from "axios";
 import { useState } from "react";
 import { BASE_URL } from "../../../config";
 
-export default function AddCat({ closeEvent, categoryId }) {
+export default function AddCat({ closeEvent, categoryId }: any) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState();
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-
+  console.log(image);
   const handleNameChange = (event: any) => {
     setName(event.target.value);
   };

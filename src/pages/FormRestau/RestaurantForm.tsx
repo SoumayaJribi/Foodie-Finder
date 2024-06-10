@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "./RestaurantForm.css";
@@ -15,7 +16,7 @@ const RestaurantForm = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     try {
       await axios.post(
         `${BASE_URL}/restaurants/register
