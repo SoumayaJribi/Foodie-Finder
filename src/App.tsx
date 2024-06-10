@@ -13,7 +13,7 @@ import PlaceOrder from "./Pfe/page/PlaceOrder/PlaceOrder";
 import FoodPreferenceForm from "./Pfe/page/PrefForm/FoodPreferenceForm";
 import { MainLayout } from "./Pfe/page/main";
 import HomePage from "./Pfe/page/pagedacc/HomePage";
-import { Profile } from "./Pfe/page/profile/Index";
+import Index from "./Pfe/page/profile/Index";
 import DaHome from "./pages/DaHome";
 import DaMenu from "./pages/DaMenu";
 import Demandes from "./pages/Demandes";
@@ -59,7 +59,7 @@ function App() {
           <Route path="commandes" element={<Orders />} />
           <Route path="dahome" element={<DaHome />} />
           <Route path="damenu" element={<DaMenu />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile" element={<Index />} />
           <Route path="mmenu" element={<MHome />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<PlaceOrder />} />
