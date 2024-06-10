@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Pfe/PageAcc/Home";
 import { UserProvider } from "./Pfe/PageAcc/Oppor/UserContext";
 import ForgotPassword from "./Pfe/page/Auth/ForgotPassword";
@@ -13,7 +12,6 @@ import PlaceOrder from "./Pfe/page/PlaceOrder/PlaceOrder";
 import FoodPreferenceForm from "./Pfe/page/PrefForm/FoodPreferenceForm";
 import { MainLayout } from "./Pfe/page/main";
 import HomePage from "./Pfe/page/pagedacc/HomePage";
-import Index from "./Pfe/page/profile/Index";
 import DaHome from "./pages/DaHome";
 import DaMenu from "./pages/DaMenu";
 import Demandes from "./pages/Demandes";
@@ -26,9 +24,10 @@ import Settings from "./pages/Settings";
 import Users from "./pages/Users";
 import { Resto } from "./pages/restaurants/Restaurant";
 //import DataSearch from "./Pfe/PageAcc/DataSearch/DataSearch";
-
-import ResMenu from "./Pfe/PageAcc/DataSearch/ResMenu/ResMenu";
 import AuthGuard from "./AuthGuard";
+import Profile from "./pages/Settings/OffreSpecial/OffSpec";
+import Discounts from "./pages/Discounts";
+
 function App() {
   return (
     <UserProvider>
@@ -56,6 +55,9 @@ function App() {
             <Route index element={<Restaurants />} />
             <Route path=":id" element={<Resto />} />
           </Route>
+          <Route path="discount">
+            <Route index element={<Discounts />} />
+          </Route>
           <Route path="restaurants/:id/menus/:idMenu" element={<Menu />} />
           {/* <Route path="resmenu" element={<ResMenu />} /> */}
           <Route path="categories" element={<Settings />} />
@@ -64,7 +66,7 @@ function App() {
           <Route path="commandes" element={<Orders />} />
           <Route path="dahome" element={<DaHome />} />
           <Route path="damenu" element={<DaMenu />} />
-          <Route path="profile" element={<Index />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="mmenu" element={<MHome />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<PlaceOrder />} />

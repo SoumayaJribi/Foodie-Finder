@@ -23,7 +23,7 @@ export default function DaHome() {
         <Box sx={{ display: "flex" }}>
           <Sidenav />
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            <Index />
+            {/* <Index /> */}
           </Box>
         </Box>
       </div>

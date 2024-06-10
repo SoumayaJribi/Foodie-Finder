@@ -3,9 +3,10 @@
 import "./PlaceOrder.css";
 import cartback from "../../../assets/cartback.jpg";
 import { Button } from "@mui/material";
+import { useContext } from "react";
 
 const PlaceOrder = () => {
-  //const { getTotalCartAmount }: any = useContext(StoreContext);
+  const { getTotalCartAmount }: any = useContext(StoreContext);
 
   return (
     <form
@@ -69,7 +70,7 @@ const PlaceOrder = () => {
           </Button>
         </div>
       </div>
-      {/*<div className="place-order-right box">
+      <div className="place-order-right box">
         <div className="cart-total">
           <h2>Totaux du panier</h2>
           <div>
@@ -90,7 +91,7 @@ const PlaceOrder = () => {
           </div>
           <button className="cart-total-button">PAIMENT</button>
         </div>
-      </div>*/}
+      </div>
     </form>
   );
 };

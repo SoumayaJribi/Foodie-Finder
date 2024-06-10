@@ -210,10 +210,10 @@ export default function Sidenav() {
             </ListItemButton>
           </ListItem>
 
-          {/* <ListItem
+          <ListItem
             disablePadding
             sx={{ display: "block" }}
-            onClick={() => navigate("/damenu")}
+            onClick={() => navigate("/discount")}
           >
             <ListItemButton
               sx={{
@@ -231,9 +231,9 @@ export default function Sidenav() {
               >
                 <MenuBookIcon />
               </ListItemIcon>
-              <ListItemText primary="Menu" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary="Discount" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
-          </ListItem> */}
+          </ListItem>
 
           {/* <ListItem
             disablePadding

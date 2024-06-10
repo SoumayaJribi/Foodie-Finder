@@ -12,7 +12,6 @@ import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 import { Box, IconButton } from "@mui/material";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const context = useContext(StoreContext);
   const [foodList, setFoodList] = useState(getStorage("cart"));
@@ -21,7 +20,6 @@ const Cart = () => {
   }
 
   const { cartItems } = context;
-  const Navigate = useNavigate();
 
   return (
     <div
@@ -43,7 +41,7 @@ const Cart = () => {
               <p>Titre</p>
               <p>Prix</p>
               <p>Quantité</p>
-              <p>Total</p>
+              <p>Totale</p>
               <p>Supprimer</p>
             </div>
             <hr />
@@ -110,37 +108,32 @@ const Cart = () => {
         <div className="cart-section">
           <div className="cart-bottom">
             <div className="cart-total">
-              <h2>Totaux du panier</h2>
+              <h2>Cart Totals</h2>
               <div>
                 <div className="cart-item-details">
-                  <p>Total</p>
+                  <p>Subtotal</p>
                   <p>{getTotalPrice("cart")} TND</p>
                 </div>
                 <hr />
                 <div className="cart-item-details">
-                  <p>Frais de livraison</p>
+                  <p>Delivery Fee</p>
                   <p>4 TND</p>
                 </div>
                 <hr />
                 <div className="cart-item-details">
                   <b>Total</b>
-                  <b> TND </b>
+                  <b> TND</b>
                 </div>
               </div>
-              <button
-                className="cart-total-button"
-                onClick={() => Navigate("/checkout")}
-              >
-                PASSER À LA CAISSE
-              </button>
+              <button className="cart-total-button">PROCEED TO CHECKOUT</button>
             </div>
 
             <div className="cart-promocode">
               <div>
-                <p>Si vous avez un code promo, saisissez-le ici</p>
+                <p>If you have a promo code, Enter it here</p>
                 <div className="cart-promocode-input">
                   <input type="text" placeholder="promo code" />
-                  <button>Soumettre</button>
+                  <button>Submit</button>
                 </div>
               </div>
             </div>

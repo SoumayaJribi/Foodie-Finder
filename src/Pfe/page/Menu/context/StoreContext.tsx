@@ -34,6 +34,8 @@ interface StoreContextProviderProps {
 const StoreContextProvider: React.FC<StoreContextProviderProps> = (props) => {
   const [cartItems, setCartItems] = useState<CartItems>({});
 
+  console.log({ cartItems });
+
   const addToCart = (itemId: number) => {
     setCartItems((prev) => ({
       ...prev,
