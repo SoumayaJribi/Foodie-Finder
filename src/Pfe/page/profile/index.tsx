@@ -24,7 +24,7 @@ const buttonStyle = {
   color: "#000000",
 };
 
-export const Profile = () => {
+const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState({
     Name: "",
@@ -38,7 +38,7 @@ export const Profile = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const { user } = useAuth();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
   };
@@ -47,15 +47,15 @@ export const Profile = () => {
     setChangePassword(!changePassword);
   };
 
-  const handleOldPasswordChange = (e) => {
+  const handleOldPasswordChange = (e: any) => {
     setOldPassword(e.target.value);
   };
 
-  const handleNewPasswordChange = (e) => {
+  const handleNewPasswordChange = (e: any) => {
     setNewPassword(e.target.value);
   };
 
-  const handleConfirmPasswordChange = (e) => {
+  const handleConfirmPasswordChange = (e: any) => {
     setConfirmPassword(e.target.value);
   };
 
@@ -242,7 +242,6 @@ export const Profile = () => {
               {user?.orders?.map((order) => (
                 <TableRow key={order.id}>
                   <TableCell>{order.id}</TableCell>
-                  <TableCell>{order.date}</TableCell>
                   <TableCell>{order.totalPrice}</TableCell>
                   <TableCell>{order.status}</TableCell>
                 </TableRow>
@@ -254,3 +253,4 @@ export const Profile = () => {
     </Box>
   );
 };
+export default Profile;

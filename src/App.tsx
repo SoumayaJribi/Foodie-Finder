@@ -13,7 +13,7 @@ import PlaceOrder from "./Pfe/page/PlaceOrder/PlaceOrder";
 import FoodPreferenceForm from "./Pfe/page/PrefForm/FoodPreferenceForm";
 import { MainLayout } from "./Pfe/page/main";
 import HomePage from "./Pfe/page/pagedacc/HomePage";
-import { Profile } from "./Pfe/page/profile";
+import { Profile } from "./Pfe/page/profile/Index";
 import DaHome from "./pages/DaHome";
 import DaMenu from "./pages/DaMenu";
 import Demandes from "./pages/Demandes";
