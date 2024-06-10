@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Axios from "axios";
 import { BASE_URL } from "../../../config";
+import axios from "axios";
 
 export default function AddRestaurants({ closeEvent }) {
   const [name, setName] = useState("");
@@ -17,6 +18,7 @@ export default function AddRestaurants({ closeEvent }) {
   const [openingHours, setOpeningHours] = useState("");
   const [cuisineType, setCuisineType] = useState("");
   const [image, setImage] = useState(null);
+
   const handleNameChange = (event: any) => {
     setName(event.target.value);
   };
@@ -41,6 +43,7 @@ export default function AddRestaurants({ closeEvent }) {
 
   const creatUser = () => {
     const token = localStorage.getItem("token");
+
     Axios.post(
       `${BASE_URL}/restaurants/register`,
       {
@@ -49,8 +52,8 @@ export default function AddRestaurants({ closeEvent }) {
         email: email,
         openingHours: openingHours,
         cuisineType: cuisineType,
-        phoneNumber: phone,
-        image: image,
+        phoneNumber: `+216 ${phone}`,
+        imageUrl: image,
       },
       {
         headers: {
@@ -59,8 +62,19 @@ export default function AddRestaurants({ closeEvent }) {
       }
     )
       .then((response: any) => {
-        console.log(response);
+        const restaurantId = response.data.id;
+
+        axios.post(
+          `${BASE_URL}/restaurants/request`,
+          { restaurantId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
       })
+      .then((res) => console.log({ res }))
       .catch((error: Error) => {
         console.error("Login failed:", error);
       });

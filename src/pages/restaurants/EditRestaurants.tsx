@@ -20,6 +20,8 @@ export default function EditRestaurants({ closeEvent }: any) {
   const [status, setStatus] = useState(""); // État pour le statut sélectionné
   const [image, setImage] = useState(null);
 
+  const role = localStorage.getItem("role");
+
   const handleNameChange = (event: any) => {
     setName(event.target.value);
   };
@@ -45,10 +47,10 @@ export default function EditRestaurants({ closeEvent }: any) {
     setImage(event.target.files[0]);
   };
 
-  const handleAddRestaurant = () => {
+  const handleEditRestaurant = () => {
     const token = localStorage.getItem("token");
-    Axios.post(
-      `${BASE_URL}/restaurants/register`,
+    Axios.patch(
+      `${BASE_URL}/restaurants/request/`,
       {
         name: name,
         address: address,
@@ -87,17 +89,19 @@ export default function EditRestaurants({ closeEvent }: any) {
       </IconButton>
       <Box height={20} />
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <TextField
-            id="outlined-basic"
-            label="Nom"
-            variant="outlined"
-            size="small"
-            onChange={handleNameChange}
-            value={name}
-            sx={{ minWidth: "100%" }}
-          />
-        </Grid>
+        {role === "Admin" || (
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-basic"
+              label="Nom"
+              variant="outlined"
+              size="small"
+              onChange={handleNameChange}
+              value={name}
+              sx={{ minWidth: "100%" }}
+            />
+          </Grid>
+        )}
         <Grid item xs={12}>
           <TextField
             id="outlined-basic"
@@ -114,91 +118,103 @@ export default function EditRestaurants({ closeEvent }: any) {
             <MenuItem value="Bloqué">Bloqué</MenuItem>
           </TextField>
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            size="small"
-            onChange={handleEmailChange}
-            value={email}
-            sx={{ minWidth: "100%" }}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="outlined-basic"
-            label="Adresse"
-            variant="outlined"
-            size="small"
-            onChange={handleAddressChange}
-            value={address}
-            sx={{ minWidth: "100%" }}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="outlined-basic"
-            label="Téléphone"
-            variant="outlined"
-            size="small"
-            onChange={handlePhoneChange}
-            value={phone}
-            sx={{ minWidth: "100%" }}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="outlined-basic"
-            label="Cuisine"
-            variant="outlined"
-            size="small"
-            onChange={handleCuisineTypeChange}
-            value={cuisineType}
-            sx={{ minWidth: "100%" }}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="outlined-basic"
-            label="Heure d'ouverture"
-            variant="outlined"
-            size="small"
-            onChange={handleOpeningHoursChange}
-            value={openingHours}
-            sx={{ minWidth: "100%" }}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6">Image:</Typography>
-          <input
-            type="file"
-            accept="image"
-            onChange={handleImageChange}
-            style={{ display: "none" }}
-            id="upload-image"
-          />
-          <label htmlFor="upload-image">
-            <Button
+        {role === "Admin" || (
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-basic"
+              label="Email"
               variant="outlined"
-              component="span"
-              style={{
-                color: "#000",
-                borderColor: "black",
-                padding: "5px 10px",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-            >
-              Parcourir
-            </Button>
-          </label>
-        </Grid>
+              size="small"
+              onChange={handleEmailChange}
+              value={email}
+              sx={{ minWidth: "100%" }}
+            />
+          </Grid>
+        )}
+        {role === "Admin" || (
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-basic"
+              label="Adresse"
+              variant="outlined"
+              size="small"
+              onChange={handleAddressChange}
+              value={address}
+              sx={{ minWidth: "100%" }}
+            />
+          </Grid>
+        )}
+        {role === "Admin" || (
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-basic"
+              label="Téléphone"
+              variant="outlined"
+              size="small"
+              onChange={handlePhoneChange}
+              value={phone}
+              sx={{ minWidth: "100%" }}
+            />
+          </Grid>
+        )}
+        {role === "Admin" || (
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-basic"
+              label="Cuisine"
+              variant="outlined"
+              size="small"
+              onChange={handleCuisineTypeChange}
+              value={cuisineType}
+              sx={{ minWidth: "100%" }}
+            />
+          </Grid>
+        )}
+        {role === "Admin" || (
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-basic"
+              label="Heure d'ouverture"
+              variant="outlined"
+              size="small"
+              onChange={handleOpeningHoursChange}
+              value={openingHours}
+              sx={{ minWidth: "100%" }}
+            />
+          </Grid>
+        )}
+        {role === "Admin" || (
+          <Grid item xs={12}>
+            <Typography variant="h6">Image:</Typography>
+            <input
+              type="file"
+              accept="image"
+              onChange={handleImageChange}
+              style={{ display: "none" }}
+              id="upload-image"
+            />
+            <label htmlFor="upload-image">
+              <Button
+                variant="outlined"
+                component="span"
+                style={{
+                  color: "#000",
+                  borderColor: "black",
+                  padding: "5px 10px",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                Parcourir
+              </Button>
+            </label>
+          </Grid>
+        )}
         <Grid item xs={12}>
           <Typography variant="h5" align="center">
             <Button
               variant="contained"
-              onClick={handleAddRestaurant}
+              onClick={handleEditRestaurant}
               sx={{
                 backgroundColor: "#000000",
                 color: "#ffffff",

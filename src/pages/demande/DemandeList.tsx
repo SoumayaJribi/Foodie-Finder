@@ -18,6 +18,8 @@ import Modal from "@mui/material/Modal";
 //import { useNavigate } from "react-router-dom";
 import DeleteDemande from "./DeleteDemande";
 import EditDemand from "./EditDemande";
+import { BASE_URL } from "../../../config";
+import axios from "axios";
 
 const style = {
   position: "absolute" as "absolute",
@@ -43,38 +45,17 @@ const mockData = [
     openingHours: "",
     statut: "",
   },
-  {
-    image: null,
-    id: 2,
-    name: "",
-    phone: "",
-    adress: "",
-    email: "",
-    cuisineType: "",
-    openingHours: "",
-    statut: "",
-  },
-  {
-    image: null,
-    id: 3,
-    name: "",
-    phone: "",
-    adress: "",
-    email: "",
-    cuisineType: "",
-    openingHours: "",
-    statut: "",
-  },
+
   // Add more mock data as needed
 ];
 export default function DemandeList() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [rows, setRows] = useState(mockData);
+  const [rows, setRows] = useState();
   const [open, setOpen] = useState(false);
-  //const [data, setData] = useState(null);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<number | null>(null);
+  const [currentId, setCurrentId] = useState();
 
   const [editopen, setEditOpen] = useState(false);
   const handleEditOpen = () => setEditOpen(true);
@@ -92,35 +73,43 @@ export default function DemandeList() {
     setPage(0);
   };
   //const navigate = useNavigate();
-  const editData = (
-    id: any,
-    name: any,
-    phone: any,
-    adress: any,
-    email: any,
-    cuisineType: any,
-    openingHours: any,
-    statut: any,
-    image: any
-  ) => {
-    const data = {
-      id: id,
-      name: name,
-      address: adress,
-      email: email,
-      openingHours: openingHours,
-      cuisineType: cuisineType,
-      phoneNumber: phone,
-      statut: statut,
-      image: image,
-    };
-    //setMenuid(data);
+  // const editData = (
+  //   id: any,
+  //   name: any,
+  //   phone: any,
+  //   adress: any,
+  //   email: any,
+  //   cuisineType: any,
+  //   openingHours: any,
+  //   statut: any,
+  //   image: any
+  // ) => {
+
+  //   const data = {
+  //     id: id,
+  //     name: name,
+  //     address: adress,
+  //     email: email,
+  //     openingHours: openingHours,
+  //     cuisineType: cuisineType,
+  //     phoneNumber: phone,
+  //     statut: statut,
+  //     image: image,
+  //   };
+
+  //   //setMenuid(data);
+  //   handleEditOpen();
+  // };
+
+  const handleOpenModal = (id) => {
+    setCurrentId(id);
     handleEditOpen();
   };
-  const handleDeleteOpen = (id: number) => {
-    setDeleteId(id);
-    setDeleteOpen(true);
-  };
+
+  // const handleDeleteOpen = (id: number) => {
+  //   setDeleteId(id);
+  //   setDeleteOpen(true);
+  // };
 
   const handleDeleteClose = () => {
     setDeleteOpen(false);
@@ -130,27 +119,30 @@ export default function DemandeList() {
   const deleteDemande = (id: number) => {
     setRows((prevRows) => prevRows.filter((row) => row.id !== id));
   };
-  {
-    /*const fetchRestaurantMenu = async () => {
+
+  const fetchRestaurantMenu = async () => {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.get(`${BASE_URL}/restaurants`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BASE_URL}/restaurants/request/pending`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      setData(response.data);
+      setRows(response.data);
     } catch (error) {
       console.error("Error fetching user profile:", error);
     }
   };
+
   useEffect(() => {
     fetchRestaurantMenu();
   }, []);
-  console.log(data);*/
-  }
+
   return (
     <>
       <div>
@@ -161,7 +153,7 @@ export default function DemandeList() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <EditDemand closeEvent={handleEditClose} />
+            <EditDemand closeEvent={handleEditClose} id={currentId} />
           </Box>
         </Modal>
         <Modal
@@ -181,7 +173,8 @@ export default function DemandeList() {
           </Box>
         </Modal>
       </div>
-      {rows.length > 0 && (
+
+      {rows?.length > 0 && (
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <Box
             sx={{
@@ -258,13 +251,27 @@ export default function DemandeList() {
                           style={{ width: "50px", height: "50px" }}
                         />
                       </TableCell>
-                      <TableCell align="left">{row?.name}</TableCell>
-                      <TableCell align="left">{row?.phone}</TableCell>
-                      <TableCell align="left">{row?.adress}</TableCell>
-                      <TableCell align="left">{row?.email}</TableCell>
-                      <TableCell align="left">{row?.cuisineType}</TableCell>
-                      <TableCell align="left">{row?.openingHours}</TableCell>
-                      <TableCell align="left">{row?.statut}</TableCell>
+                      <TableCell align="left">
+                        {row?.restaurant?.name}
+                      </TableCell>
+                      <TableCell align="left">
+                        {row?.restaurant?.phone}
+                      </TableCell>
+                      <TableCell align="left">
+                        {row?.restaurant?.adress}
+                      </TableCell>
+                      <TableCell align="left">
+                        {row?.restaurant?.email}
+                      </TableCell>
+                      <TableCell align="left">
+                        {row?.restaurant?.cuisineType}
+                      </TableCell>
+                      <TableCell align="left">
+                        {row?.restaurant?.openingHours}
+                      </TableCell>
+                      <TableCell align="left">
+                        {row?.restaurant?.statut}
+                      </TableCell>
                       <TableCell align="left">
                         <Stack spacing={2} direction="row">
                           <EditIcon
@@ -273,27 +280,16 @@ export default function DemandeList() {
                               color: "black",
                               cursor: "pointer",
                             }}
-                            onClick={() => {
-                              editData(
-                                row.id,
-                                row.name,
-                                row.email,
-                                row.adress,
-                                row.phone,
-                                row.cuisineType,
-                                row.openingHours,
-                                row.image
-                              );
-                            }}
+                            onClick={() => handleOpenModal(row?.id)}
                           />
-                          <DeleteIcon
+                          {/* <DeleteIcon
                             sx={{
                               fontSize: "20px",
                               color: "#e0b828",
                               cursor: "pointer",
                             }}
                             onClick={() => handleDeleteOpen(row.id)}
-                          />
+                          /> */}
                         </Stack>
                       </TableCell>
                     </TableRow>
@@ -312,6 +308,8 @@ export default function DemandeList() {
           />
         </Paper>
       )}
+
+      {rows?.length === 0 && <h>you have no demands yet !</h>}
     </>
   );
 }

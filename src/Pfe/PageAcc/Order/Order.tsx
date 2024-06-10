@@ -9,7 +9,6 @@ const Order = () => {
   const handleMenuClick = () => {
     navigate("/mmenu");
   };
-  console.log("Order component mounted"); // Ajout d'un message de console
 
   return (
     <div className="order">

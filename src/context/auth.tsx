@@ -70,6 +70,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
+
+  if (user?.role?.name) localStorage.setItem("role", user?.role?.name);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {

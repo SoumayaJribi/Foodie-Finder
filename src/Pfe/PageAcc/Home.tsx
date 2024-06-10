@@ -14,7 +14,6 @@ function Home() {
     menuItems: [],
   });
 
-  console.log(user);
   return (
     <>
       <Hero setSearchData={setSearchData} />

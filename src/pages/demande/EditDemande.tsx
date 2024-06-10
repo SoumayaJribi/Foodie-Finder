@@ -7,17 +7,36 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem"; // Importez MenuItem
+import { BASE_URL } from "../../../config";
+import axios from "axios";
 
-export default function EditDemande({ closeEvent }: any) {
+export default function EditDemande({ closeEvent, id }: any) {
   const [statut, setStatut] = useState("");
+
+  const status = statut === "Rejeté" ? "REJECTED" : "APPROVED";
 
   const handleStatutChange = (event: any) => {
     setStatut(event.target.value);
   };
 
-  const handleSubmit = () => {
-    // Logique de soumission ici
-    console.log("Statut sélectionné:", statut);
+  const handleEditDemande = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      await axios
+        .patch(
+          `${BASE_URL}/restaurants/request/${id}/status/${status}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(() => closeEvent());
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -53,7 +72,7 @@ export default function EditDemande({ closeEvent }: any) {
           <Typography variant="h5" align="center">
             <Button
               variant="contained"
-              onClick={handleSubmit}
+              onClick={handleEditDemande}
               sx={{
                 backgroundColor: "#000000",
                 color: "#ffffff",

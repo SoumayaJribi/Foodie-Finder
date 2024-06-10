@@ -50,6 +50,7 @@ const FoodItem: React.FC<FoodItemProps> = ({
     });
     setCount(0);
   };
+
   return (
     <div className="food-item">
       <div className="food-item-img-container">

@@ -44,7 +44,6 @@ const Login = () => {
       password: loginPassword,
     })
       .then((response) => {
-        console.log(response);
         localStorage.setItem("token", response.data.result.token);
         fetchUserProfile();
         navigate("/");

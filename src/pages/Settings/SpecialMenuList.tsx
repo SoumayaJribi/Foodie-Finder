@@ -34,7 +34,7 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
   const token = localStorage.getItem("token");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [rows, setRows] = useState(mockData);
+  const [rows, setRows] = useState();
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -64,11 +64,10 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
     setPage(0);
   };
 
-  // waiting for backend fix
   const handleDeleteMenuItem = async (id) => {
     try {
       await axios.delete(
-        `${BASE_URL}/restaurants/${categoryId}/${id}
+        `${BASE_URL}/restaurants/deleteItem/${id}
 `,
         {
           headers: {
@@ -130,7 +129,7 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
         </Box>
       </Modal>
 
-      {rows.length > 0 && (
+      {rows?.length > 0 && (
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <Box
             sx={{
@@ -226,7 +225,7 @@ const SpecialMenuList = ({ categoryId }: { categoryId: string }) => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={rows?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

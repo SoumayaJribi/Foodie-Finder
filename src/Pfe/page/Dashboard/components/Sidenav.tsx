@@ -81,6 +81,8 @@ export default function Sidenav() {
     updateOpen(!open);
   };
 
+  const role = localStorage.getItem("role");
+
   return (
     <Box sx={{ display: "flex" }}>
       <Box height={30} />
@@ -120,57 +122,66 @@ export default function Sidenav() {
               <ListItemText primary="Accueil" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => navigate("/users")}
-          >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
+
+          {role === "Admin" && (
+            <ListItem
+              disablePadding
+              sx={{ display: "block" }}
+              onClick={() => navigate("/users")}
             >
-              <ListItemIcon
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <GroupIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Utilisateurs"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => navigate("/demandes")}
-          >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <GroupIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Utilisateurs"
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          )}
+          {role === "Admin" && (
+            <ListItem
+              disablePadding
+              sx={{ display: "block" }}
+              onClick={() => navigate("/demandes")}
             >
-              <ListItemIcon
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Demandes" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Demandes"
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          )}
+
           <ListItem
             disablePadding
             sx={{ display: "block" }}
@@ -198,7 +209,8 @@ export default function Sidenav() {
               />
             </ListItemButton>
           </ListItem>
-          <ListItem
+
+          {/* <ListItem
             disablePadding
             sx={{ display: "block" }}
             onClick={() => navigate("/damenu")}
@@ -221,8 +233,9 @@ export default function Sidenav() {
               </ListItemIcon>
               <ListItemText primary="Menu" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
-          </ListItem>
-          <ListItem
+          </ListItem> */}
+
+          {/* <ListItem
             disablePadding
             sx={{ display: "block" }}
             onClick={() => navigate("/commandes")}
@@ -248,8 +261,9 @@ export default function Sidenav() {
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
-          </ListItem>
-          <ListItem
+          </ListItem> */}
+
+          {/* <ListItem
             disablePadding
             sx={{ display: "block" }}
             onClick={() => navigate("/categories")}
@@ -275,7 +289,7 @@ export default function Sidenav() {
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
         </List>
       </Drawer>
     </Box>

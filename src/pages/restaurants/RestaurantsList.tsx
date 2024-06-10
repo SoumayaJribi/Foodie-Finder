@@ -34,53 +34,18 @@ const style = {
   p: 4,
 };
 
-const mockData = [
-  {
-    image: null,
-    id: 1,
-    name: "",
-    phoneNumber: "",
-    address: "",
-    email: "",
-    cuisineType: "",
-    openingHours: "",
-    status: "",
-  },
-  {
-    image: null,
-    id: 2,
-    name: "",
-    phoneNumber: "",
-    address: "",
-    email: "",
-    cuisineType: "",
-    openingHours: "",
-    status: "",
-  },
-  {
-    image: null,
-    id: 3,
-    name: "",
-    phoneNumber: "",
-    address: "",
-    email: "",
-    cuisineType: "",
-    openingHours: "",
-    status: "",
-  },
-  // Add more mock data as needed
-];
 export default function restaurantsList() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [rows, setRows] = useState(mockData);
+  const [rows, setRows] = useState();
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState([]);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [editopen, setEditOpen] = useState(false);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+
+  const role = localStorage.getItem("role");
 
   const handleEditOpen = () => setEditOpen(true);
   const handleEditClose = () => setEditOpen(false);
@@ -94,31 +59,6 @@ export default function restaurantsList() {
   const handleChangeRowsPerPage = (event: any) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const editData = (
-    id: any,
-    name: any,
-    phoneNumber: any,
-    address: any,
-    email: any,
-    cuisineType: any,
-    openingHours: any,
-
-    status: any
-  ) => {
-    const data = {
-      id: id,
-      name: name,
-      address: address,
-      email: email,
-      openingHours: openingHours,
-      cuisineType: cuisineType,
-      phoneNumber: phoneNumber,
-      status: status,
-    };
-    //setMenuid(data);
-    handleEditOpen();
   };
 
   const handleDeleteOpen = (id: number) => {
@@ -145,14 +85,19 @@ export default function restaurantsList() {
   };
 
   const fetchRestaurantMenu = async () => {
+    const api =
+      role === "Admin"
+        ? `${BASE_URL}/restaurants/AllRestaurants`
+        : `${BASE_URL}/restaurants`;
+
     try {
-      const response = await axios.get(`${BASE_URL}/restaurants`, {
+      const response = await axios.get(api, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      setData(response.data);
+      setRows(response.data);
     } catch (error) {
       console.error("Error fetching restaurent menu:", error);
     }
@@ -175,6 +120,7 @@ export default function restaurantsList() {
             <AddRestaurants closeEvent={handleClose} />
           </Box>
         </Modal>
+
         <Modal
           open={editopen}
           onClose={handleClose}
@@ -185,6 +131,7 @@ export default function restaurantsList() {
             <EditRestaurants closeEvent={handleEditClose} />
           </Box>
         </Modal>
+
         <Modal
           open={deleteOpen}
           onClose={handleDeleteClose}
@@ -203,7 +150,7 @@ export default function restaurantsList() {
         </Modal>
       </div>
 
-      {rows.length > 0 && (
+      {rows?.length > 0 && (
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <Box
             sx={{
@@ -276,30 +223,61 @@ export default function restaurantsList() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {(data as any)?.map((row: any) => (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    onClick={() => {
-                      navigate(`/restaurants/${row?.id}`);
-                    }}
-                    key={row?.id}
-                  >
-                    <TableCell align="left">
+                {(rows as any)?.map((row: any) => (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row?.id}>
+                    <TableCell
+                      align="left"
+                      onClick={() => navigate(`/restaurants/${row?.id}`)}
+                    >
                       <img
-                        src={row?.image || ""}
+                        src={row?.imageUrl || ""}
                         alt=""
                         style={{ width: "50px", height: "50px" }}
                       />
                     </TableCell>
-                    <TableCell align="left">{row?.name}</TableCell>
-                    <TableCell align="left">{row?.phoneNumber}</TableCell>
-                    <TableCell align="left">{row?.address}</TableCell>
-                    <TableCell align="left">{row?.email}</TableCell>
-                    <TableCell align="left">{row?.cuisineType}</TableCell>
-                    <TableCell align="left">{row?.openingHours}</TableCell>
-                    <TableCell align="left">{row?.status}</TableCell>
+                    <TableCell
+                      align="left"
+                      onClick={() => navigate(`/restaurants/${row?.id}`)}
+                    >
+                      {row?.name}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      onClick={() => navigate(`/restaurants/${row?.id}`)}
+                    >
+                      {row?.phoneNumber}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      onClick={() => navigate(`/restaurants/${row?.id}`)}
+                    >
+                      {row?.address}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      onClick={() => navigate(`/restaurants/${row?.id}`)}
+                    >
+                      {row?.email}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      onClick={() => navigate(`/restaurants/${row?.id}`)}
+                    >
+                      {row?.cuisineType}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      onClick={() => navigate(`/restaurants/${row?.id}`)}
+                    >
+                      {row?.openingHours}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      onClick={() => navigate(`/restaurants/${row?.id}`)}
+                    >
+                      {row?.status}
+                    </TableCell>
+
                     <TableCell align="left">
                       <Stack spacing={2} direction="row">
                         <EditIcon
@@ -308,27 +286,16 @@ export default function restaurantsList() {
                             color: "black",
                             cursor: "pointer",
                           }}
-                          onClick={() => {
-                            editData(
-                              row.id,
-                              row.name,
-                              row.email,
-                              row.address,
-                              row.phoneNumber,
-                              row.cuisineType,
-                              row.openingHours,
-                              row.status
-                            );
-                          }}
+                          onClick={() => handleEditOpen()}
                         />
-                        <DeleteIcon
+                        {/* <DeleteIcon
                           sx={{
                             fontSize: "20px",
                             color: "#e0b828",
                             cursor: "pointer",
                           }}
                           onClick={() => handleDeleteOpen(row.id)}
-                        />
+                        /> */}
                       </Stack>
                     </TableCell>
                   </TableRow>
@@ -339,7 +306,7 @@ export default function restaurantsList() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={rows?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

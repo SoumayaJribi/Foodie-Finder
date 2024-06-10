@@ -152,7 +152,7 @@ export default function List({ idMenu }: { idMenu: string }) {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `${BASE_URL}/restaurants/menus/${idMenu}/categories`,
         { name: newTabLabel },
         {
@@ -161,8 +161,6 @@ export default function List({ idMenu }: { idMenu: string }) {
           },
         }
       );
-
-      console.log({ response });
     } catch (error) {
       console.log("error while getting categories", error);
     }

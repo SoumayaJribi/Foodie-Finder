@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import Home from "./Pfe/PageAcc/Home";
 import { UserProvider } from "./Pfe/PageAcc/Oppor/UserContext";
 import ForgotPassword from "./Pfe/page/Auth/ForgotPassword";
@@ -25,15 +25,11 @@ import Restaurants from "./pages/Restaurants";
 import Settings from "./pages/Settings";
 import Users from "./pages/Users";
 import { Resto } from "./pages/restaurants/Restaurant";
+//import DataSearch from "./Pfe/PageAcc/DataSearch/DataSearch";
 
+import ResMenu from "./Pfe/PageAcc/DataSearch/ResMenu/ResMenu";
+import AuthGuard from "./AuthGuard";
 function App() {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    if (!token) navigate("auth/login");
-  }, []);
-
   return (
     <UserProvider>
       <Routes>
@@ -44,7 +40,15 @@ function App() {
           <Route path="forgot-password" element={<ForgotPassword />} />
           <Route path="reset" element={<ResetPassword />} />
         </Route>
-        <Route path="/" element={<MainLayout />}>
+
+        <Route
+          path="/"
+          element={
+            <AuthGuard>
+              <MainLayout />
+            </AuthGuard>
+          }
+        >
           <Route index element={<Home />} />
           <Route path="Prefform" element={<FoodPreferenceForm />} />
           <Route path="PHome" element={<HomePage />} />
@@ -53,6 +57,7 @@ function App() {
             <Route path=":id" element={<Resto />} />
           </Route>
           <Route path="restaurants/:id/menus/:idMenu" element={<Menu />} />
+          {/* <Route path="resmenu" element={<ResMenu />} /> */}
           <Route path="categories" element={<Settings />} />
           <Route path="users" element={<Users />} />
           <Route path="demandes" element={<Demandes />} />

@@ -24,14 +24,13 @@ export default function AddMenu({ closeEvent }) {
     setImage(event.target.files[0]);
   };
 
-
-  //rihab 
+  //rihab
   const handleCreateMenu = async () => {
     // Logique pour envoyer les données du nouveau restaurant avec l'image à l'API
     const token = localStorage.getItem("token ");
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `${BASE_URL}/...`,
         { name, description, image },
         {
@@ -40,8 +39,6 @@ export default function AddMenu({ closeEvent }) {
           },
         }
       );
-
-      await console.log({ response });
     } catch (error) {
       console.log(error);
     }
